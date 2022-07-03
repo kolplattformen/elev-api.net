@@ -55,7 +55,7 @@ public class Api
         temp_res = await _httpClient.GetAsync(temp_url);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
         var json = RegExp("\\$Config=(.*});", temp_content);
-        var authStuff = JsonSerializer.Deserialize<AuthorizeStuff>(json);
+        var authStuff = JsonSerializer.Deserialize<AuthorizeStuff>(json, jsonSerializerOptions);
 
         temp_url = "https://login.live.com/Me.htm?v=3";
         temp_res = await _httpClient.GetAsync(temp_url);
@@ -67,12 +67,29 @@ public class Api
             "{\"username\":\"" + email + "\",\"isOtherIdpSupported\":true,\"checkPhones\":false,\"isRemoteNGCSupported\":true,\"isCookieBannerShown\":false,\"isFidoSupported\":true,\"originalRequest\":\"" + authStuff.sCtx + "\",\"country\":\"SE\",\"forceotclogin\":false,\"isExternalFederationDisallowed\":false,\"isRemoteConnectSupported\":false,\"federationFlags\":0,\"isSignup\":false,\"flowToken\":\"" + authStuff.sFT + "\",\"isAccessPassSupported\":true}";
 
         temp_url = "https://login.microsoftonline.com/common/GetCredentialType?mkt=en-US";
-        temp_res = await _httpClient.PostAsync(temp_url, new StringContent(content));
+        var request = new HttpRequestMessage
+        {
+            RequestUri = new Uri(temp_url),
+            Method = HttpMethod.Post,
+            Headers =
+            {
+                {"hpgrequestid", authStuff.sessionId },
+                {"canary", authStuff.apiCanary},
+                {"hpgid", authStuff.hpgid.ToString()},
+                {"hpgact", authStuff.hpgact.ToString()},
+                {"client-request-id", authStuff.correlationId}
+            },
+            Content = new StringContent(content)
+        };
+        temp_res = await _httpClient.SendAsync(request);
+
+        //temp_res = await _httpClient.PostAsync(temp_url, new StringContent(content));
         var temp = await temp_res.Content.ReadAsStringAsync();
         var  credType = JsonSerializer.Deserialize<CredentialType>(temp);
 
 
         temp_url = credType.Credentials.FederationRedirectUrl;
+        temp_url = temp_url.Replace("wctx=", "wctx=LoginOptions%3D3%26") + "&cbcxt=";
         temp_res = await _httpClient.GetAsync(temp_url);
         temp_content = await temp_res.Content.ReadAsStringAsync();
 
@@ -102,11 +119,14 @@ public class Api
         // Byt till Elevinloggning. Behövs?
         temp_url = $"https://login001.stockholm.se/siteminderagent/forms/aelever.jsp?SMAUTHREASON=0&SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&SMQUERYDATA=null&TARGET=https://login001.stockholm.se/affwebservices/redirectjsp/eduadfs.jsp?SMPORTALURL=https%3A%2F%2Flogin001.stockholm.se%2Faffwebservices%2Fpublic%2Fsaml2sso&SAMLTRANSACTIONID={samlTransactionId}";
         temp_res = await _httpClient.GetAsync(temp_url);
-    
+        
+
         //Ladda sida för inloggning med användnamn och lösen
         temp_url = UpdateSamlTransactionIdInEncodedStartpageParam($"https://login001.stockholm.se/siteminderagent/forms/loginForm.jsp?SMAGENTNAME=IfNE0iMOtzq2TcxFADHylR6rkmFtwzoxRKh5nRMO9NBqIxHrc38jFyt56FASdxk1&POSTTARGET=https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9sb2dpbjAwMS5zdG9ja2hvbG0uc2UvYWZmd2Vic2VydmljZXMvcmVkaXJlY3Rqc3AvZWR1YWRmcy5qc3A/U01QT1JUQUxVUkw9aHR0cHMlM0ElMkYlMkZsb2dpbjAwMS5zdG9ja2hvbG0uc2UlMkZhZmZ3ZWJzZXJ2aWNlcyUyRnB1YmxpYyUyRnNhbWwyc3NvJlNBTUxUUkFOU0FDVElPTklEPTEwMjkwNThjLTM0MTg2YWFhLTRmYWRiYzY5LTRkN2RkMDU3LTczYmRkNGQ3LTA1MA==&TARGET=https://login001.stockholm.se/affwebservices/redirectjsp/eduadfs.jsp?SMPORTALURL=https%3A%2F%2Flogin001.stockholm.se%2Faffwebservices%2Fpublic%2Fsaml2sso&SAMLTRANSACTIONID={samlTransactionId}", samlTransactionId);
         temp_res = await _httpClient.GetAsync(temp_url);
-        
+        temp_content = await temp_res.Content.ReadAsStringAsync();
+        var tttttt = RegExp("name=target value='([^']*)'", temp_content);
+
         // Här skickas inloggningsuppgifterna in
         temp_url = "https://login001.stockholm.se/siteminderagent/forms/login.fcc";
         temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
@@ -145,10 +165,11 @@ public class Api
         temp_content = await temp_res.Content.ReadAsStringAsync();
 
         var wa = RegExp("\"wa\\\" value=\\\"([^\\\"]*)\"", temp_content);
-        var wresult  = HttpUtility.HtmlDecode(RegExp("\"wresult\\\" value=\\\"([^\\\"]*)\"", temp_content));
-        var wctx = RegExp("\"wctx\\\" value=\\\"([^\\\"]*)\"", temp_content);
-        
+        var wresult = HttpUtility.HtmlDecode(RegExp("\"wresult\\\" value=\\\"([^\\\"]*)\"", temp_content));
+        var wctx = HttpUtility.HtmlDecode(RegExp("\"wctx\\\" value=\\\"([^\\\"]*)\"", temp_content));
+
         // https://login.microsoftonline.com/login.srf
+        _cookieContainer.Add(new Cookie("ESTSWCTXFLOWTOKEN", credType.FlowToken, "/", "login.microsoftonline.com"));
         temp_url = RegExp("action=\\\"([^\\\"]*)", temp_content);
         temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
         {
@@ -165,17 +186,33 @@ public class Api
         var loginSrfAnswer = JsonSerializer.Deserialize<LoginSrfAnswer>(json, jsonSerializerOptions);
 
 
+        _cookieContainer.Add(new Cookie("ESTSWCTXFLOWTOKEN", null, "/", "login.microsoftonline.com"));
+
+
+        //_cookieContainer.Add(new Cookie("AADSSO", "NA|NoExtension", "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("brcap", "0", "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("clrc", null, "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("ESTSAUTHPERSISTENT", null, "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("ESTSAUTH", null, "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("ESTSAUTHLIGHT", null, "/", "login.microsoftonline.com"));
+        
+        //_cookieContainer.Add(new Cookie("ch", null, "/", "login.microsoftonline.com"));
+        //_cookieContainer.Add(new Cookie("ESTSSC", "00", "/", "login.microsoftonline.com"));
+
+
+
+        var ccccc = _cookieContainer.GetAllCookies();
         // We are here. 
         //TODO: previous page (login.srf) loads some javascript files that populates the parameters for next call
 
         temp_url = "https://login.microsoftonline.com/kmsi";
         temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
         {
-            new KeyValuePair<string, string>("LoginOptions", "1"),
+            new KeyValuePair<string, string>("LoginOptions", "3"),
             new KeyValuePair<string, string>("type", "28"),
             new KeyValuePair<string, string>("ctx", loginSrfAnswer.sCtx),
-            new KeyValuePair<string, string>("hpgrequestid", wctx),
-            new KeyValuePair<string, string>(loginSrfAnswer.sFTName, loginSrfAnswer.sFT),
+            new KeyValuePair<string, string>("hpgrequestid", loginSrfAnswer.sessionId),
+            new KeyValuePair<string, string>("flowToken", loginSrfAnswer.sFT),
             new KeyValuePair<string, string>("canary", loginSrfAnswer.canary),
             new KeyValuePair<string, string>("i19", "2340"),
         }));
@@ -224,7 +261,10 @@ class AuthorizeStuff
     public string sFT { get; set; }
     public string sCtx { get; set; }
     public string apiCanary { get; set; }
-    public string clientRequestId { get; set; }
+    public string correlationId { get; set; }
+    public int hpgact { get; set; }
+    public int hpgid { get; set; }
+    public string sessionId { get; set; }
 }
 
 // Autogenerated from answer to https://login.microsoftonline.com/common/GetCredentialType?mkt=en-US
