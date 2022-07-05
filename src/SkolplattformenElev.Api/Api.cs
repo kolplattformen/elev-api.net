@@ -52,6 +52,11 @@ public class Api
 
         // temp_url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&protectedtoken=true&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=D183A6ABC1D1AC7C936304BB86DF8DAC910B49EBC59F2480-DAC0A994AB24A884A2F5B50818B527241CDB7D3431E47CA861C947015C5C1F6F&redirect_uri=https%3A%2F%2Felevstockholm.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=7a323fa0-c071-4000-4218-a4696e60d3c2&sso_reload=true";
         temp_url = $"{temp_url}&sso_reload=true";
+
+        _cookieContainer.Add(new Cookie("AADSSO", "NA|NoExtension", "/", "login.microsoftonline.com"));
+        _cookieContainer.Add(new Cookie("SSOCOOKIEPULLED", "1", "/", "login.microsoftonline.com"));
+
+        //SSOCOOKIEPULLED=1
         temp_res = await _httpClient.GetAsync(temp_url);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
         var json = RegExp("\\$Config=(.*});", temp_content);
@@ -213,14 +218,19 @@ public class Api
         {
             new KeyValuePair<string, string>("LoginOptions", "3"),
             new KeyValuePair<string, string>("type", "28"),
-            new KeyValuePair<string, string>("ctx", authStuff.sCtx),
+            new KeyValuePair<string, string>("ctx", loginSrfAnswer.sCtx),
             new KeyValuePair<string, string>("hpgrequestid", loginSrfAnswer.sessionId),
-            new KeyValuePair<string, string>("flowToken", authStuff.sFT),
+            new KeyValuePair<string, string>("flowToken", loginSrfAnswer.sFT),
             new KeyValuePair<string, string>("canary", loginSrfAnswer.canary),
-            new KeyValuePair<string, string>("i19", "2340"),
+            new KeyValuePair<string, string>("i19", "23"),
         }));
 
         temp_content = await temp_res.Content.ReadAsStringAsync();
+
+
+        //temp_url = $"https://login.microsoftonline.com/kmsi?client-request-id={authStuff.correlationId}&sso_reload=True";
+        //temp_res = await _httpClient.PostAsync(temp_url,null);
+        //temp_content = await temp_res.Content.ReadAsStringAsync();
 
         var code = RegExp("\"code\\\" value=\\\"([^\\\"]*)\"", temp_content);
         var id_token = HttpUtility.HtmlDecode(RegExp("\"id_token\\\" value=\\\"([^\\\"]*)\"", temp_content));
@@ -230,6 +240,22 @@ public class Api
         var correlationId = RegExp("\"correlation_id\\\" value=\\\"([^\\\"]*)\"", temp_content);
         temp_url = RegExp("action=\\\"([^\\\"]*)", temp_content);
 
+        temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
+          {
+            new KeyValuePair<string, string>("code", code),
+            new KeyValuePair<string, string>("id_token", id_token),
+            new KeyValuePair<string, string>("state", state),
+            new KeyValuePair<string, string>("session_state", sessionState),
+            new KeyValuePair<string, string>("correlation_id", correlationId),
+     
+        }));
+        temp_content = await temp_res.Content.ReadAsStringAsync();
+
+        while (temp_res.Headers.Location != null)
+        {
+            temp_url = "https://elevstockholm.sharepoint.com" + temp_res.Headers.Location?.ToString();
+            temp_res = await _httpClient.GetAsync(temp_url);
+        }
 
         temp_url = "";
         temp_res = await _httpClient.GetAsync(temp_url);
