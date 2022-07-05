@@ -73,6 +73,9 @@ public class Api
             Method = HttpMethod.Post,
             Headers =
             {
+                {"AADSSO", "NA|NoExtension" },
+                {"brcap", "0" },
+                {"clrc","{%2219132%22%3a[%22P4dbKyr2%22%2c%2299lxtQhC%22]}"},
                 {"hpgrequestid", authStuff.sessionId },
                 {"canary", authStuff.apiCanary},
                 {"hpgid", authStuff.hpgid.ToString()},
@@ -210,9 +213,9 @@ public class Api
         {
             new KeyValuePair<string, string>("LoginOptions", "3"),
             new KeyValuePair<string, string>("type", "28"),
-            new KeyValuePair<string, string>("ctx", loginSrfAnswer.sCtx),
+            new KeyValuePair<string, string>("ctx", authStuff.sCtx),
             new KeyValuePair<string, string>("hpgrequestid", loginSrfAnswer.sessionId),
-            new KeyValuePair<string, string>("flowToken", loginSrfAnswer.sFT),
+            new KeyValuePair<string, string>("flowToken", authStuff.sFT),
             new KeyValuePair<string, string>("canary", loginSrfAnswer.canary),
             new KeyValuePair<string, string>("i19", "2340"),
         }));
