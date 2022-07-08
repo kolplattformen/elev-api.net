@@ -10,6 +10,8 @@ var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 var api = new SkolplattformenElev.Api();
 await api.LogIn(elev.Email, elev.Username, elev.Password);
 
+var itemList = await api.GetNewsItemList();
+
 
 class ElevInfo
 {

@@ -10,7 +10,7 @@ public class Api
 {
     private readonly CookieContainer _cookieContainer;
     private readonly HttpClient _httpClient;
-
+    private string _sharePointRequestGuid;
     public Api()
     {
         _cookieContainer = new CookieContainer();
@@ -187,8 +187,7 @@ public class Api
         }));
 
         // Skickat data till login.srf på rad 76
-
-
+        
         temp_content = await temp_res.Content.ReadAsStringAsync();
         json = RegExp("\\$Config=(.*});", temp_content);
         var loginSrfAnswer = JsonSerializer.Deserialize<LoginSrfAnswer>(json, jsonSerializerOptions);
@@ -257,9 +256,58 @@ public class Api
             temp_res = await _httpClient.GetAsync(temp_url);
         }
 
-        temp_url = "";
-        temp_res = await _httpClient.GetAsync(temp_url);
+        // DONE at last. The last redirect should be back to the startpage but now logged in.
 
+
+        if (temp_res.Headers.TryGetValues("SPRequestGuid", out var spHeader))
+        {
+            _sharePointRequestGuid = spHeader.First();
+        }
+
+        _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
+        _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
+
+        
+
+        // Tests below this line -------------------------------------------------------------------------------------------
+
+
+        //temp_url = "";
+        //temp_res = await _httpClient.GetAsync(temp_url);
+
+    }
+
+    public async Task<string> GetNewsItemList()
+    {
+        var query = "{ \"request\": {\"Querytext\":\"\",\"QueryTemplate\":\"{searchterms} -SiteTitle:\\\"Användarstöd\\\" AND (LastModifiedTime=\\\"this year\\\" OR LastModifiedTime=\\\"last year\\\") AND  ((ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND PromotedState=2 AND NOT ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00873E381CC9DD4F2E808A377A72C311BB*))\",\"ClientType\":\"HighlightedContentWebPart\",\"RowLimit\":6,\"RowsPerPage\":6,\"TimeZoneId\":4,\"SelectProperties\":[\"ContentType\",\"ContentTypeId\",\"Title\",\"EditorOwsUser\",\"ModifiedBy\",\"LastModifiedBy\",\"FileExtension\",\"FileType\",\"Path\",\"SiteName\",\"SiteTitle\",\"PictureThumbnailURL\",\"DefaultEncodingURL\",\"LastModifiedTime\",\"ListID\",\"ListItemID\",\"SiteID\",\"WebId\",\"UniqueID\",\"LastModifiedTime\",\"SitePath\",\"UserName\",\"ProfileImageSrc\",\"Name\",\"Initials\",\"WebPath\",\"PreviewUrl\",\"IconUrl\",\"AccentColor\",\"CardType\",\"TipActionLabel\",\"TipActionButtonIcon\",\"ClassName\",\"TelemetryProperties\",\"ImageOverlapText\",\"ImageOverlapTextAriaLabel\",\"SPWebUrl\",\"IsExternalContent\",\"MediaServiceMetadata\",\"LastModifiedTimeForRetention\"],\"Properties\":[{\"Name\":\"TrimSelectProperties\",\"Value\":{\"StrVal\":\"1\",\"QueryPropertyValueTypeIndex\":1}},{\"Name\":\"EnableDynamicGroups\",\"Value\":{\"BoolVal\":\"True\",\"QueryPropertyValueTypeIndex\":3}},{\"Name\":\"EnableMultiGeoSearch\",\"Value\":{\"BoolVal\":\"False\",\"QueryPropertyValueTypeIndex\":3}}],\"SortList\":[{\"Property\":\"LastModifiedTime\",\"Direction\":1}],\"SourceId\":\"8413CD39-2156-4E00-B54D-11EFD9ABDB89\",\"TrimDuplicates\":false} }";
+        var temp_url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/_api/search/postquery";
+        var request = new HttpRequestMessage
+        {
+            RequestUri = new Uri(temp_url),
+            Method = HttpMethod.Post,
+            Headers =
+            {
+                {"odata-version", "3.0" },
+                {"originalcorrelationid", _sharePointRequestGuid },
+                {"Referer", "https://elevstockholm.sharepoint.com/sites/skolplattformen/" },
+                {"SdkVersion", "SPFx/ContentRollupWebPart/daf0b71c-6de8-4ef7-b511-faae7c388708"},
+                {"x-requestdigest", "0x937E28EB90A2419E897E81B1383394190C5F89F76EA28A2A1009CB07073B268163EF33E3D07AA1069351C1696821728CCAD2B69678DB87B9EE7F73292C204731,20 May 2022 10:21:19 -0000"},
+                {"Origin", "https://elevstockholm.sharepoint.com" },
+                //{"KillSwitchOverrides_disableKillSwitches", "" },
+                //{"KillSwitchOverrides_enableKillSwitches", "" },
+                //{"Origin", "" },
+
+                //{"accept: ", "application/json;odata=nometadata" }
+            },
+            Content = new StringContent(query)
+        };
+        request.Headers.TryAddWithoutValidation("accept", new[] { "application/json;odata=nometadata" });
+        
+
+        var temp_res = await _httpClient.SendAsync(request);
+        var temp_content = await temp_res.Content.ReadAsStringAsync();
+
+        return temp_content;
     }
 
     private string RegExp(string pattern, string source)
