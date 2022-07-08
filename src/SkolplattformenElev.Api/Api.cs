@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -11,6 +12,7 @@ public class Api
     private readonly CookieContainer _cookieContainer;
     private readonly HttpClient _httpClient;
     private string _sharePointRequestGuid;
+    private string _formDigestValue;
     public Api()
     {
         _cookieContainer = new CookieContainer();
@@ -258,6 +260,8 @@ public class Api
 
         // DONE at last. The last redirect should be back to the startpage but now logged in.
 
+        temp_content = await temp_res.Content.ReadAsStringAsync();
+        _formDigestValue = RegExp("formDigestValue\":\"([^\\\"]*)\"", temp_content);
 
         if (temp_res.Headers.TryGetValues("SPRequestGuid", out var spHeader))
         {
@@ -291,7 +295,10 @@ public class Api
                 {"originalcorrelationid", _sharePointRequestGuid },
                 {"Referer", "https://elevstockholm.sharepoint.com/sites/skolplattformen/" },
                 {"SdkVersion", "SPFx/ContentRollupWebPart/daf0b71c-6de8-4ef7-b511-faae7c388708"},
-                {"x-requestdigest", "0x937E28EB90A2419E897E81B1383394190C5F89F76EA28A2A1009CB07073B268163EF33E3D07AA1069351C1696821728CCAD2B69678DB87B9EE7F73292C204731,20 May 2022 10:21:19 -0000"},
+                {"x-requestdigest", _formDigestValue},
+              //  {"Content-Type","application/json;charset=utf-8"},
+                //0x9280DE2E2BA2CCB142FA1C8BE516D34F60CFD107B4DFA72FB97B5B16982C69A4B97547C67F53C11EE2DD3F289883F16A4CEA7B34C8E69904FCA82F6C26B68392,08 Jul 2022 10:45:00 -0000
+
                 {"Origin", "https://elevstockholm.sharepoint.com" },
                 //{"KillSwitchOverrides_disableKillSwitches", "" },
                 //{"KillSwitchOverrides_enableKillSwitches", "" },
@@ -302,7 +309,7 @@ public class Api
             Content = new StringContent(query)
         };
         request.Headers.TryAddWithoutValidation("accept", new[] { "application/json;odata=nometadata" });
-        
+        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
 
         var temp_res = await _httpClient.SendAsync(request);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
