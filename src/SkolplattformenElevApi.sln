@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkolplattformenElevDemo", "SkolplattformenElevDemo\SkolplattformenElevDemo.csproj", "{728A6994-BFDC-4ABB-933B-3D46E528E883}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkolplattformenElev.Api", "SkolplattformenElev.Api\SkolplattformenElev.Api.csproj", "{62AF6787-154C-4A8D-B632-FFAA3855ACA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkolplattformenElevApi", "SkolplattformenElevApi\SkolplattformenElevApi.csproj", "{62AF6787-154C-4A8D-B632-FFAA3855ACA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FF9B4D3-FEE3-4F8D-AA8E-9C3F312E57D0}"
 	ProjectSection(SolutionItems) = preProject
