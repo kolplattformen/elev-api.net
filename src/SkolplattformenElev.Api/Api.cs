@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -10,7 +11,8 @@ public class Api
 {
     private readonly CookieContainer _cookieContainer;
     private readonly HttpClient _httpClient;
-
+    private string _sharePointRequestGuid;
+    private string _formDigestValue;
     public Api()
     {
         _cookieContainer = new CookieContainer();
@@ -52,6 +54,11 @@ public class Api
 
         // temp_url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&protectedtoken=true&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=D183A6ABC1D1AC7C936304BB86DF8DAC910B49EBC59F2480-DAC0A994AB24A884A2F5B50818B527241CDB7D3431E47CA861C947015C5C1F6F&redirect_uri=https%3A%2F%2Felevstockholm.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=7a323fa0-c071-4000-4218-a4696e60d3c2&sso_reload=true";
         temp_url = $"{temp_url}&sso_reload=true";
+
+        _cookieContainer.Add(new Cookie("AADSSO", "NA|NoExtension", "/", "login.microsoftonline.com"));
+        _cookieContainer.Add(new Cookie("SSOCOOKIEPULLED", "1", "/", "login.microsoftonline.com"));
+
+        //SSOCOOKIEPULLED=1
         temp_res = await _httpClient.GetAsync(temp_url);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
         var json = RegExp("\\$Config=(.*});", temp_content);
@@ -73,6 +80,9 @@ public class Api
             Method = HttpMethod.Post,
             Headers =
             {
+                {"AADSSO", "NA|NoExtension" },
+                {"brcap", "0" },
+                {"clrc","{%2219132%22%3a[%22P4dbKyr2%22%2c%2299lxtQhC%22]}"},
                 {"hpgrequestid", authStuff.sessionId },
                 {"canary", authStuff.apiCanary},
                 {"hpgid", authStuff.hpgid.ToString()},
@@ -179,8 +189,7 @@ public class Api
         }));
 
         // Skickat data till login.srf på rad 76
-
-
+        
         temp_content = await temp_res.Content.ReadAsStringAsync();
         json = RegExp("\\$Config=(.*});", temp_content);
         var loginSrfAnswer = JsonSerializer.Deserialize<LoginSrfAnswer>(json, jsonSerializerOptions);
@@ -214,10 +223,15 @@ public class Api
             new KeyValuePair<string, string>("hpgrequestid", loginSrfAnswer.sessionId),
             new KeyValuePair<string, string>("flowToken", loginSrfAnswer.sFT),
             new KeyValuePair<string, string>("canary", loginSrfAnswer.canary),
-            new KeyValuePair<string, string>("i19", "2340"),
+            new KeyValuePair<string, string>("i19", "23"),
         }));
 
         temp_content = await temp_res.Content.ReadAsStringAsync();
+
+
+        //temp_url = $"https://login.microsoftonline.com/kmsi?client-request-id={authStuff.correlationId}&sso_reload=True";
+        //temp_res = await _httpClient.PostAsync(temp_url,null);
+        //temp_content = await temp_res.Content.ReadAsStringAsync();
 
         var code = RegExp("\"code\\\" value=\\\"([^\\\"]*)\"", temp_content);
         var id_token = HttpUtility.HtmlDecode(RegExp("\"id_token\\\" value=\\\"([^\\\"]*)\"", temp_content));
@@ -227,10 +241,80 @@ public class Api
         var correlationId = RegExp("\"correlation_id\\\" value=\\\"([^\\\"]*)\"", temp_content);
         temp_url = RegExp("action=\\\"([^\\\"]*)", temp_content);
 
+        temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
+          {
+            new KeyValuePair<string, string>("code", code),
+            new KeyValuePair<string, string>("id_token", id_token),
+            new KeyValuePair<string, string>("state", state),
+            new KeyValuePair<string, string>("session_state", sessionState),
+            new KeyValuePair<string, string>("correlation_id", correlationId),
+     
+        }));
+        temp_content = await temp_res.Content.ReadAsStringAsync();
 
-        temp_url = "";
-        temp_res = await _httpClient.GetAsync(temp_url);
+        while (temp_res.Headers.Location != null)
+        {
+            temp_url = "https://elevstockholm.sharepoint.com" + temp_res.Headers.Location?.ToString();
+            temp_res = await _httpClient.GetAsync(temp_url);
+        }
 
+        // DONE at last. The last redirect should be back to the startpage but now logged in.
+
+        temp_content = await temp_res.Content.ReadAsStringAsync();
+        _formDigestValue = RegExp("formDigestValue\":\"([^\\\"]*)\"", temp_content);
+
+        if (temp_res.Headers.TryGetValues("SPRequestGuid", out var spHeader))
+        {
+            _sharePointRequestGuid = spHeader.First();
+        }
+
+        _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
+        _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
+
+        
+
+        // Tests below this line -------------------------------------------------------------------------------------------
+
+
+        //temp_url = "";
+        //temp_res = await _httpClient.GetAsync(temp_url);
+
+    }
+
+    public async Task<string> GetNewsItemList()
+    {
+        var query = "{ \"request\": {\"Querytext\":\"\",\"QueryTemplate\":\"{searchterms} -SiteTitle:\\\"Användarstöd\\\" AND (LastModifiedTime=\\\"this year\\\" OR LastModifiedTime=\\\"last year\\\") AND  ((ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND PromotedState=2 AND NOT ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00873E381CC9DD4F2E808A377A72C311BB*))\",\"ClientType\":\"HighlightedContentWebPart\",\"RowLimit\":6,\"RowsPerPage\":6,\"TimeZoneId\":4,\"SelectProperties\":[\"ContentType\",\"ContentTypeId\",\"Title\",\"EditorOwsUser\",\"ModifiedBy\",\"LastModifiedBy\",\"FileExtension\",\"FileType\",\"Path\",\"SiteName\",\"SiteTitle\",\"PictureThumbnailURL\",\"DefaultEncodingURL\",\"LastModifiedTime\",\"ListID\",\"ListItemID\",\"SiteID\",\"WebId\",\"UniqueID\",\"LastModifiedTime\",\"SitePath\",\"UserName\",\"ProfileImageSrc\",\"Name\",\"Initials\",\"WebPath\",\"PreviewUrl\",\"IconUrl\",\"AccentColor\",\"CardType\",\"TipActionLabel\",\"TipActionButtonIcon\",\"ClassName\",\"TelemetryProperties\",\"ImageOverlapText\",\"ImageOverlapTextAriaLabel\",\"SPWebUrl\",\"IsExternalContent\",\"MediaServiceMetadata\",\"LastModifiedTimeForRetention\"],\"Properties\":[{\"Name\":\"TrimSelectProperties\",\"Value\":{\"StrVal\":\"1\",\"QueryPropertyValueTypeIndex\":1}},{\"Name\":\"EnableDynamicGroups\",\"Value\":{\"BoolVal\":\"True\",\"QueryPropertyValueTypeIndex\":3}},{\"Name\":\"EnableMultiGeoSearch\",\"Value\":{\"BoolVal\":\"False\",\"QueryPropertyValueTypeIndex\":3}}],\"SortList\":[{\"Property\":\"LastModifiedTime\",\"Direction\":1}],\"SourceId\":\"8413CD39-2156-4E00-B54D-11EFD9ABDB89\",\"TrimDuplicates\":false} }";
+        var temp_url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/_api/search/postquery";
+        var request = new HttpRequestMessage
+        {
+            RequestUri = new Uri(temp_url),
+            Method = HttpMethod.Post,
+            Headers =
+            {
+                {"odata-version", "3.0" },
+                {"originalcorrelationid", _sharePointRequestGuid },
+                {"Referer", "https://elevstockholm.sharepoint.com/sites/skolplattformen/" },
+                {"SdkVersion", "SPFx/ContentRollupWebPart/daf0b71c-6de8-4ef7-b511-faae7c388708"},
+                {"x-requestdigest", _formDigestValue},
+              //  {"Content-Type","application/json;charset=utf-8"},
+                //0x9280DE2E2BA2CCB142FA1C8BE516D34F60CFD107B4DFA72FB97B5B16982C69A4B97547C67F53C11EE2DD3F289883F16A4CEA7B34C8E69904FCA82F6C26B68392,08 Jul 2022 10:45:00 -0000
+
+                {"Origin", "https://elevstockholm.sharepoint.com" },
+                //{"KillSwitchOverrides_disableKillSwitches", "" },
+                //{"KillSwitchOverrides_enableKillSwitches", "" },
+                //{"Origin", "" },
+
+                //{"accept: ", "application/json;odata=nometadata" }
+            },
+            Content = new StringContent(query)
+        };
+        request.Headers.TryAddWithoutValidation("accept", new[] { "application/json;odata=nometadata" });
+        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
+
+        var temp_res = await _httpClient.SendAsync(request);
+        var temp_content = await temp_res.Content.ReadAsStringAsync();
+
+        return temp_content;
     }
 
     private string RegExp(string pattern, string source)
