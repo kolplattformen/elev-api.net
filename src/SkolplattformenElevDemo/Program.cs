@@ -13,6 +13,13 @@ await api.LogIn(elev.Email, elev.Username, elev.Password);
 
 var itemList = await api.GetNewsItemList();
 
+Console.WriteLine("----- News -----");
+foreach (var newsListItem in itemList)
+{
+    Console.WriteLine($"{newsListItem.Title} | {newsListItem.ModifiedBy} | {newsListItem.Path}");
+}
+
+await api.GetNewsItem(itemList[1].Path);
 
 class ElevInfo
 {
