@@ -3,7 +3,7 @@
 A POC for login (and maybe more) to the Skolplattformen Student portal in .NET.
 
 ## Current status
-Not wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
+Not much wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
 
 ## Contribute / Try
 
