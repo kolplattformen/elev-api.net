@@ -1,11 +1,15 @@
 # elev-api.net
 
-A POC for login (and maybe more) to the Skolplattformen Student portal written in .NET.
+A POC for login (and maybe more) to the Skolplattformen Student portal written in C#.
 
 The end goal is to create an app for students. This repo is used to find out the inner workings of all things Skolplattformen. It may or may not be a part of the final product.
 
 ## Current status
 Not much is wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
+
+### Working parts
+* Login to the Sharepoint part is working. Others untested.
+* Getting a list of news item and a single news item is partly done.
 
 ## Contribute / Try
 ### Prerequisites
