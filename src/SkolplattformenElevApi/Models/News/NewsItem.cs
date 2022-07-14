@@ -10,5 +10,10 @@ namespace SkolplattformenElevApi.Models.News
     {
         public string Title { get; set; }
         public string InnerHtml { get; set; }
+        public string Description { get; internal set; }
+        public DateTime Published { get; internal set; }
+        public DateTime Modified { get; internal set; }
+        public string BannerImage { get; internal set; }
+        public string AuthorName { get; internal set; }
     }
 }

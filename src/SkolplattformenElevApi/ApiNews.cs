@@ -73,6 +73,13 @@ namespace SkolplattformenElevApi
 
             var newsItem = new NewsItem();
             newsItem.InnerHtml = CanvasContentToHtml(deserializedCanvasContent);
+            newsItem.Title = deserialized.item.Title;
+            newsItem.Description = deserialized.item.Description;
+            newsItem.Published = deserialized.item.FirstPublishedDate;
+            newsItem.Modified = deserialized.item.Modified;
+            newsItem.BannerImage = deserialized.item.BannerImageUrl.Url;
+            newsItem.AuthorName = string.Empty; //TODO where is it?
+            
 
             return newsItem;
         }
