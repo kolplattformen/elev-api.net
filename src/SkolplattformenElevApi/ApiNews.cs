@@ -95,7 +95,7 @@ namespace SkolplattformenElevApi
                     case 1: break; // TODO: find out what what it is
                     case 2: break;
                     case 3:
-                        html += "<img src=\"" + cc.webPartData.serverProcessedContent.imageSources.imageSource + "\">";
+                        html += "<img src=\"" + cc.webPartData.serverProcessedContent.imageSources.imageSource + "\">"; 
                         break;
                     case 4: html += cc.innerHTML;
                         break;

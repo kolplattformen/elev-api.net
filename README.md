@@ -8,8 +8,9 @@ The end goal is to create an app for students. This repo is used to find out the
 Not much is wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
 
 ### Working parts
-* Login to the Sharepoint part is working. Others untested.
-* Getting a list of news item and a single news item is partly done.
+* Login to the Sharepoint part and absence is working. Others untested.
+* Getting a list of news items and a single news item is partly done.
+* Getting absence list
 
 ## Contribute / Try
 ### Prerequisites

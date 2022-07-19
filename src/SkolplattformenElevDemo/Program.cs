@@ -11,7 +11,7 @@ var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 var api = new Api();
 await api.LogIn(elev.Email, elev.Username, elev.Password);
 
-var itemList = await api.GetNewsItemList();
+var itemList = await api.GetNewsItemList(5);
 
 Console.WriteLine("----- News -----");
 foreach (var newsListItem in itemList)
@@ -20,6 +20,16 @@ foreach (var newsListItem in itemList)
 }
 
 await api.GetNewsItem(itemList[1].Path);
+
+Console.WriteLine("---- Planned Absence -----");
+
+await api.AbsenceSsoLogin();
+var absenceList = await api.GetPlannedAbsenceList();
+foreach (var a in absenceList)
+{
+    Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
+}
+
 
 class ElevInfo
 {
