@@ -21,7 +21,7 @@ foreach (var newsListItem in itemList)
 
 await api.GetNewsItem(itemList[1].Path);
 
-Console.WriteLine("---- Planned Absence -----");
+Console.WriteLine("----- Planned Absence -----");
 
 await api.AbsenceSsoLogin();
 var absenceList = await api.GetPlannedAbsenceList();
@@ -30,6 +30,15 @@ foreach (var a in absenceList)
     Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
 }
 
+Console.WriteLine("----- Timetable ------");
+
+await api.TimetableSsoLogin();
+var lessonInfo = await api.GetTimetable(2022, 37);
+
+foreach (var info in lessonInfo)
+{
+    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.Texts[0]} {info.Texts[1]} {info.Texts[2]} ");
+}
 
 class ElevInfo
 {
