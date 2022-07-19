@@ -8,9 +8,10 @@ The end goal is to create an app for students. This repo is used to find out the
 Not much is wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
 
 ### Working parts
-* Login to the Sharepoint part and absence is working. Others untested.
+* Login to the Sharepoint part, absence and timetable is working. Others untested.
 * Getting a list of news items and a single news item is partly done.
 * Getting absence list
+* Getting timetable
 
 ## Contribute / Try
 ### Prerequisites
@@ -33,6 +34,7 @@ Please file issues and requests.
 * Install tooling for your editor for debugging
 
 ```bash
+dotnet restore
 cd src/SkolplattformenElevDemo
 dotnet run
 ```
