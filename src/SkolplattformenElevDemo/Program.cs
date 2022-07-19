@@ -11,34 +11,39 @@ var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 var api = new Api();
 await api.LogIn(elev.Email, elev.Username, elev.Password);
 
-var itemList = await api.GetNewsItemList(5);
+//var itemList = await api.GetNewsItemList(5);
 
-Console.WriteLine("----- News -----");
-foreach (var newsListItem in itemList)
-{
-    Console.WriteLine($"{newsListItem.Title} | {newsListItem.ModifiedBy} | {newsListItem.Path}");
-}
+//Console.WriteLine("----- News -----");
+//foreach (var newsListItem in itemList)
+//{
+//    Console.WriteLine($"{newsListItem.Title} | {newsListItem.ModifiedBy} | {newsListItem.Path}");
+//}
 
-await api.GetNewsItem(itemList[1].Path);
+//await api.GetNewsItem(itemList[1].Path);
 
-Console.WriteLine("----- Planned Absence -----");
+//Console.WriteLine("----- Planned Absence -----");
 
-await api.AbsenceSsoLogin();
-var absenceList = await api.GetPlannedAbsenceList();
-foreach (var a in absenceList)
-{
-    Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
-}
+//await api.AbsenceSsoLogin();
+//var absenceList = await api.GetPlannedAbsenceList();
+//foreach (var a in absenceList)
+//{
+//    Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
+//}
 
-Console.WriteLine("----- Timetable ------");
+//Console.WriteLine("----- Timetable ------");
 
-await api.TimetableSsoLogin();
-var lessonInfo = await api.GetTimetable(2022, 37);
+//await api.TimetableSsoLogin();
+//var lessonInfo = await api.GetTimetable(2022, 37);
 
-foreach (var info in lessonInfo)
-{
-    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.Texts[0]} {info.Texts[1]} {info.Texts[2]} ");
-}
+//foreach (var info in lessonInfo)
+//{
+//    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.Texts[0]} {info.Texts[1]} {info.Texts[2]} ");
+//}
+
+//var token = await api.GetMsGraphBearerToken();
+
+var me = await api.GetMeAsync();
+Console.WriteLine($"Me: {me}");
 
 class ElevInfo
 {
