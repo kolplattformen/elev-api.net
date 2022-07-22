@@ -1,0 +1,38 @@
+﻿@page "/"
+@using MauiBlazorDemoApp.Data
+@inject SkolplattformenService SkolplattformenService
+
+<h1>Hello, world!</h1>
+
+
+@if(SkolplattformenService.IsLoggedIn)
+{
+    <span>Välkommen @SkolplattformenService.LoggedInName</span>
+}
+else
+{
+    <p>Logga in</p>
+
+    <input  type="text" @bind=@email placeholder="email">
+     <input type="text" @bind=@username placeholder="användarnamn">
+    <input type="password" @bind=@password placeholder="lösenord">
+
+    <button class="btn btn-primary" @onclick="LoginButtonPressed">Logga in</button>
+
+}
+
+
+
+
+
+
+@code{
+    private string email = "";
+    private string username = "";
+    private string password = "";
+
+    private async Task LoginButtonPressed()
+    {
+        await SkolplattformenService.LogIn(email, username, password);
+    }
+}

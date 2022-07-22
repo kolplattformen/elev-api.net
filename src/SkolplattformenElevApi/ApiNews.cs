@@ -77,7 +77,7 @@ namespace SkolplattformenElevApi
             newsItem.Description = deserialized.item.Description;
             newsItem.Published = deserialized.item.FirstPublishedDate;
             newsItem.Modified = deserialized.item.Modified;
-            newsItem.BannerImage = deserialized.item.BannerImageUrl.Url;
+            newsItem.BannerImage = deserialized.item.BannerImageUrl?.Url;
             newsItem.AuthorName = string.Empty; //TODO where is it?
             
 
