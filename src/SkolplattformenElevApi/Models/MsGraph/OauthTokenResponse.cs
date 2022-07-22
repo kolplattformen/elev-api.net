@@ -43,7 +43,7 @@ internal class OauthTokenResponse
 internal static class OauthTokenResource
 {
     public static string Bing => "https://www.bing.com";
-    public static string OutlookSeatch => "https://outlook.office365.com/search";
+    public static string OutlookSearch => "https://outlook.office365.com/search";
     public static string Loki => "https://loki.delve.office.com";
     public static string MsGraph => "https://graph.microsoft.com";
 
