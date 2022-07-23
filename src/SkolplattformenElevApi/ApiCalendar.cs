@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Web;
+using SkolplattformenElevApi.Models.Calendar;
 
 namespace SkolplattformenElevApi;
 
@@ -76,7 +78,7 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
     }
 
 
-    public async Task<string> GetCalendarAsync(DateOnly date)
+    public async Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
     {
 
         var token = await GetAzureApiAccessTokenAsync();
@@ -101,7 +103,10 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
 
    
         var content = await response.Content.ReadAsStringAsync();
-        return content; // for now, until we know the format
+        var deserialized = JsonSerializer.Deserialize<CalendarResponse>(content);
+
+        // Whole day events gets wrong timezone?
+        return deserialized.Data; 
     }
     
 }
