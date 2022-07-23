@@ -249,6 +249,10 @@ namespace SkolplattformenElevApi
 
             temp_content = await temp_res.Content.ReadAsStringAsync();
             _formDigestValue = RegExp("formDigestValue\":\"([^\\\"]*)\"", temp_content);
+            _spfx3rdPartyServicePrincipalId = RegExp("spfx3rdPartyServicePrincipalId\":\"([^\\\"]*)\"", temp_content);
+
+            //TODO: Try find a better way to get this, maybe get and deserialize the entire object to get this and the above values
+            _apiEndpoint = RegExp("appId\\\\\\\\\\\":\\\\\\\\\\\"([^\\\\]*)\\\\", temp_content);
 
             if (temp_res.Headers.TryGetValues("SPRequestGuid", out var spHeader))
             {
@@ -258,9 +262,10 @@ namespace SkolplattformenElevApi
             _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
             _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
 
-
+            _email = email;
 
             // Tests below this line -------------------------------------------------------------------------------------------
+
 
 
             //temp_url = "";
