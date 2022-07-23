@@ -40,6 +40,10 @@ foreach (var info in lessonInfo)
     Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.Texts[0]} {info.Texts[1]} {info.Texts[2]} ");
 }
 
+
+var calendar = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now));
+calendar = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now.AddDays(1)));
+
 class ElevInfo
 {
     public string Email { get; set; }

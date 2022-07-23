@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SkolplattformenElevApi;
@@ -9,6 +10,12 @@ public partial class Api
     private readonly HttpClient _httpClient;
     private string _sharePointRequestGuid;
     private string _formDigestValue;
+
+    private string _email;
+    private string _spfx3rdPartyServicePrincipalId;
+    private string _apiEndpoint;
+    private string _apiEndpointAccessToken = string.Empty;
+
     public Api()
     {
         _cookieContainer = new CookieContainer();
@@ -27,5 +34,15 @@ public partial class Api
         return matches[0].Groups[1].Value;
     }
 
-    
+    private string Base64Encode(string input)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(input);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    private string Base64Decode(string input)
+    {
+        byte[] data = Convert.FromBase64String(input);
+        return Encoding.UTF8.GetString(data);
+    }
 }
