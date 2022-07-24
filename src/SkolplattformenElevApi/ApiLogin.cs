@@ -8,7 +8,7 @@ namespace SkolplattformenElevApi
 {
     public partial class Api
     {
-        public async Task LogIn(string email, string username, string password)
+        public async Task LogInAsync(string email, string username, string password)
         {
 
             var jsonSerializerOptions = new JsonSerializerOptions
@@ -270,6 +270,11 @@ namespace SkolplattformenElevApi
 
             //temp_url = "";
             //temp_res = await _httpClient.GetAsync(temp_url);
+
+
+            // Log in to other services
+            await AbsenceSsoLoginAsync();
+            await TimetableSsoLoginAsync();
 
         }
         private string UpdateSamlTransactionIdInEncodedStartpageParam(string url, string samlTransationId)

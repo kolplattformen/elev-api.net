@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task TimetableSsoLogin()
+    private async Task TimetableSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=TimetableViewer";
         
@@ -39,7 +39,7 @@ public partial class Api
         }
     }
 
-    private async Task<(string,string)> GetTimetableUnitGuidAndPersonGuid()
+    private async Task<(string,string)> GetTimetableUnitGuidAndPersonGuidAsync()
     {
         var temp_url = "https://fns.stockholm.se/ng/api/services/skola24/get/personal/timetables";
 
@@ -76,7 +76,7 @@ public partial class Api
         return (unitGuid, personGuid);
     }
 
-    private async Task<string> GetTimetableRenderKey()
+    private async Task<string> GetTimetableRenderKeyAsync()
     {
         var temp_url = "https://fns.stockholm.se/ng/api/get/timetable/render/key";
 
@@ -106,10 +106,10 @@ public partial class Api
         return key;
     }
 
-    public async Task<List<LessonInfo>?> GetTimetable(int year, int week)
+    public async Task<List<LessonInfo>?> GetTimetableAsync(int year, int week)
     {
-        var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
-        var key = await GetTimetableRenderKey();
+        var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuidAsync();
+        var key = await GetTimetableRenderKeyAsync();
 
         var content = "{\"renderKey\":\"" + key +  "\",\"host\":\"fns.stockholm.se\",\"unitGuid\":\"" + unitGuid + "\",\"startDate\":null,\"endDate\":null,\"scheduleDay\":0,\"blackAndWhite\":false,\"width\":1227,\"height\":1191,\"selectionType\":5,\"selection\":\"" + personGuid + "\",\"showHeader\":false,\"periodText\":\"\",\"week\":" + week + ",\"year\":" + year + ",\"privateFreeTextMode\":null,\"privateSelectionMode\":true,\"customerKey\":\"\"}";
 

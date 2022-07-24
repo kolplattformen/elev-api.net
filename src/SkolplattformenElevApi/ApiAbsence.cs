@@ -6,7 +6,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task AbsenceSsoLogin()
+    private async Task AbsenceSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
         
@@ -38,7 +38,7 @@ public partial class Api
         }
     }
 
-    private async Task GetAbsenceUserInfo()
+    private async Task GetAbsenceUserInfoAsync()
     {
         var temp_url = "https://fns.stockholm.se/ng/api/get/user/info";
 
@@ -60,7 +60,7 @@ public partial class Api
 
     }
 
-    private async Task<string> GetPlannedAbsenceUserGuid()
+    private async Task<string> GetPlannedAbsenceUserGuidAsync()
     {
         var temp_url = "https://fns.stockholm.se/ng/api/get/guid/for/current/user";
 
@@ -90,10 +90,10 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<PlannedAbsence>?> GetPlannedAbsenceList()
+    public async Task<List<PlannedAbsence>?> GetPlannedAbsenceListAsync()
     {
-        await GetAbsenceUserInfo();
-        var guid = await GetPlannedAbsenceUserGuid();
+        await GetAbsenceUserInfoAsync();
+        var guid = await GetPlannedAbsenceUserGuidAsync();
 
         var content = "{\"studentPersonGuid\":\"" + guid + "\",\"groupGuid\":null,\"isPrivate\":true,\"selectedDate\":null}";
 
