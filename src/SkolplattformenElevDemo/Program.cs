@@ -13,7 +13,7 @@ await api.LogIn(elev.Email, elev.Username, elev.Password);
 
 var itemList = await api.GetNewsItemList(5);
 
-Console.WriteLine("----- News -----");
+Console.WriteLine("\n----- News -----");
 foreach (var newsListItem in itemList)
 {
     Console.WriteLine($"{newsListItem.Title} | {newsListItem.ModifiedBy} | {newsListItem.Path}");
@@ -21,7 +21,7 @@ foreach (var newsListItem in itemList)
 
 await api.GetNewsItem(itemList[1].Path);
 
-Console.WriteLine("----- Planned Absence -----");
+Console.WriteLine("\n----- Planned Absence -----");
 
 await api.AbsenceSsoLogin();
 var absenceList = await api.GetPlannedAbsenceList();
@@ -30,7 +30,7 @@ foreach (var a in absenceList)
     Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
 }
 
-Console.WriteLine("----- Timetable ------");
+Console.WriteLine("\n----- Timetable ------");
 
 await api.TimetableSsoLogin();
 var lessonInfo = await api.GetTimetable(2022, 37);
@@ -41,8 +41,36 @@ foreach (var info in lessonInfo)
 }
 
 
-var calendar = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now));
-calendar = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now.AddDays(1)));
+Console.WriteLine("\n----- Calendar ------");
+
+var calendarItems = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now));
+foreach (var item in calendarItems)
+{
+    Console.WriteLine($"{item.Start} {item.End} {item.Title}");
+}
+
+
+Console.WriteLine("\n----- User ------");
+var user = await api.GetUserAsync();
+Console.WriteLine(user.Name);
+
+Console.WriteLine("\n----- School ------");
+
+var school = await api.GetSchoolAsync(user.Schools.First().ExternalId);
+Console.WriteLine($"{school.SchoolName} ");
+
+var teachers = await api.GetTeachersAsync();
+Console.WriteLine("\n----- Teachers ------");
+foreach (var teacher in teachers)
+{
+    Console.WriteLine($"{teacher.FIRSTNAME} {teacher.LASTNAME} {teacher.EMAILADDRESS}");
+}
+
+
+
+
+
+return; // this just here to have a place to set a breakpoint
 
 class ElevInfo
 {
