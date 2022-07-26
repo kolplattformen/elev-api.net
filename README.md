@@ -13,6 +13,9 @@ Not much is wroking yet. Code is a mess. Don't bother unless you are here to try
 * Getting absence list
 * Getting timetable
 * Getting calendar entries
+* Getting user info
+* Getting school info
+* Getting list och teachers
 
 ## Contribute / Try
 ### Prerequisites
