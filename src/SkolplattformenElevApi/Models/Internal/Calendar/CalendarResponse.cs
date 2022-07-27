@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SkolplattformenElevApi.Models.Calendar;
+namespace SkolplattformenElevApi.Models.Internal.Calendar;
 
 // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
-public class CalendarItem
+internal class CalendarItemData
 {
     [JsonPropertyName("id")]
     public string Id { get; set; }
@@ -36,7 +36,7 @@ internal class CalendarResponse
     public object Error { get; set; }
 
     [JsonPropertyName("Data")]
-    public List<CalendarItem>? Data { get; set; }
+    public List<CalendarItemData>? Data { get; set; }
 }
 
 

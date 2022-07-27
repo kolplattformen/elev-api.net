@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkolplattformenElevApi.Models.StockholmAzureApi
+﻿namespace SkolplattformenElevApi.Models.Internal.StockholmAzureApi
 {
-    public class Teacher
+    internal class TeacherData
     {
         public int ID { get; set; }
         public string BATCH { get; set; }
@@ -23,14 +17,14 @@ namespace SkolplattformenElevApi.Models.StockholmAzureApi
         public List<Section> Sections { get; set; }
     }
 
-    public class GetTeachersResponse
+    internal class GetTeachersResponse
     {
         public bool Success { get; set; }
         public object Error { get; set; }
-        public List<Teacher> Data { get; set; }
+        public List<TeacherData> Data { get; set; }
     }
 
-    public class Section
+    internal class Section
     {
         public int ID { get; set; }
         public string BATCH { get; set; }

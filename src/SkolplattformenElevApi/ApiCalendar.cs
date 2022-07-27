@@ -1,7 +1,8 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Web;
-using SkolplattformenElevApi.Models.Calendar;
+using SkolplattformenElevApi.Models;
+using SkolplattformenElevApi.Models.Internal.Calendar;
 
 namespace SkolplattformenElevApi;
 
@@ -105,8 +106,28 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
         var content = await response.Content.ReadAsStringAsync();
         var deserialized = JsonSerializer.Deserialize<CalendarResponse>(content);
 
+        if (deserialized?.Data == null)
+        {
+            return new List<CalendarItem>();
+        }
+
+        var calendarItemList = new List<CalendarItem>();
+        foreach (var item in deserialized.Data)
+        {
+            calendarItemList.Add(new CalendarItem
+            {
+                Id = item.Id,
+                Title = item.Title,
+                Location = item.Location,
+                Start = item.Start,
+                End = item.End,
+                IsAllDay = false,
+                WebLink = item.WebLink,
+            });
+        }
+
         // Whole day events gets wrong timezone?
-        return deserialized.Data; 
+        return calendarItemList; 
     }
     
 }

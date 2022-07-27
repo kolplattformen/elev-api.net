@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
-namespace SkolplattformenElevApi.Models.Sharepoint
+namespace SkolplattformenElevApi.Models.Internal.Sharepoint
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class Action
+    internal class Action
     {
         public string type { get; set; }
         public Parameters parameters { get; set; }
     }
 
-    public class AlternativeUrlMap
+    internal class AlternativeUrlMap
     {
         public string UserPhotoAspx { get; set; }
         public string MediaTAThumbnailPathUrl { get; set; }
@@ -27,7 +22,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
      }
 
 
-    public class AppBarParams
+    internal class AppBarParams
     {
         public bool isDisabled { get; set; }
         public bool isCreateAffordanceEnabled { get; set; }
@@ -46,35 +41,35 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool useAppBarLists { get; set; }
     }
 
-    public class BannerImageUrl
+    internal class BannerImageUrl
     {
         public string Description { get; set; }
         public string Url { get; set; }
     }
 
-    public class BaseUrl
+    internal class BaseUrl
     {
         public SpfxDependency spfxDependency { get; set; }
         public bool spfxLink { get; set; }
     }
 
-    public class BotDrivenAdaptiveCardExtension
+    internal class BotDrivenAdaptiveCardExtension
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class CallToActionLink
+    internal class CallToActionLink
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class CallToActionText
+    internal class CallToActionText
     {
         public bool spfxSearchablePlainText { get; set; }
     }
 
-    public class CardButtonAction
+    internal class CardButtonAction
     {
         public string title { get; set; }
         public string style { get; set; }
@@ -82,19 +77,19 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool isVisible { get; set; }
     }
 
-    public class CardDesignerAce
+    internal class CardDesignerAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class CardSelectionAction
+    internal class CardSelectionAction
     {
         public string type { get; set; }
         public Parameters parameters { get; set; }
     }
 
-    public class CarouselSettings
+    internal class CarouselSettings
     {
         public bool autoplay { get; set; }
         public int autoplaySpeed { get; set; }
@@ -105,13 +100,13 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool useStockItems { get; set; }
     }
 
-    public class CategoriesPages
+    internal class CategoriesPages
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class Child
+    internal class Child
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -126,19 +121,19 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public object OpenInNewWindow { get; set; }
     }
 
-    public class ClientPersistedCacheKey
+    internal class ClientPersistedCacheKey
     {
         public CurrentKey CurrentKey { get; set; }
         public PreviousKey PreviousKey { get; set; }
     }
 
-    public class CompanyPortalReference
+    internal class CompanyPortalReference
     {
         public string SiteId { get; set; }
         public string WebId { get; set; }
     }
 
-    public class Content
+    internal class Content
     {
         public string CanvasContent1 { get; set; }
         public string LayoutWebpartsContent { get; set; }
@@ -146,7 +141,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public object CommentsDisabled { get; set; }
     }
 
-    public class Content2
+    internal class Content2
     {
         public Title title { get; set; }
         public CallToActionText callToActionText { get; set; }
@@ -156,19 +151,19 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public CallToActionLink callToActionLink { get; set; }
     }
 
-    public class ContentCenterEverywhereFeature
+    internal class ContentCenterEverywhereFeature
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class ContentCenterFeature
+    internal class ContentCenterFeature
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class ContextWebInfo
+    internal class ContextWebInfo
     {
         public string _ObjectType_ { get; set; }
         public int FormDigestTimeoutSeconds { get; set; }
@@ -179,7 +174,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string WebFullUrl { get; set; }
     }
 
-    public class Current
+    internal class Current
     {
         public BaseUrl baseUrl { get; set; }
         public SiteId siteId { get; set; }
@@ -204,13 +199,13 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public WebRelativeListUrl webRelativeListUrl { get; set; }
     }
 
-    public class CurrentKey
+    internal class CurrentKey
     {
         public string Key { get; set; }
         public string Date { get; set; }
     }
 
-    public class DaylightDate
+    internal class DaylightDate
     {
         public int Year { get; set; }
         public int Month { get; set; }
@@ -222,28 +217,28 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public int Milliseconds { get; set; }
     }
 
-    public class Description
+    internal class Description
     {
         public string @default { get; set; }
         public bool spfxSearchablePlainText { get; set; }
     }
 
-    public class DriveInfo
+    internal class DriveInfo
     {
     }
 
-    public class EEDashboard
+    internal class EEDashboard
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class Email
+    internal class Email
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class FarmSettings
+    internal class FarmSettings
     {
         public string ExternalService_powerappswebhostname { get; set; }
         public string ExternalService_powerappscreatehostname { get; set; }
@@ -290,7 +285,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string ExternalService_phonelinkcdnendpoint { get; set; }
     }
 
-    public class FeatureInfo
+    internal class FeatureInfo
     {
         public SitePages SitePages { get; set; }
         public SitePagesResources SitePagesResources { get; set; }
@@ -314,34 +309,34 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public ContentCenterEverywhereFeature ContentCenterEverywhereFeature { get; set; }
     }
 
-    public class FeedVideo
+    internal class FeedVideo
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class FeedVideoResources
+    internal class FeedVideoResources
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class FilterBy
+    internal class FilterBy
     {
     }
 
-    public class FirstFlushPerf
+    internal class FirstFlushPerf
     {
         public string MondoExecutionTime { get; set; }
     }
 
-    public class FollowingContent
+    internal class FollowingContent
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class GridSettings
+    internal class GridSettings
     {
         public int imageSize { get; set; }
         public int imageCropping { get; set; }
@@ -349,12 +344,12 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool lightbox { get; set; }
     }
 
-    public class Group
+    internal class Group
     {
         public string @default { get; set; }
     }
 
-    public class Guids
+    internal class Guids
     {
         public SiteId siteId { get; set; }
         public ListId listId { get; set; }
@@ -362,12 +357,12 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public UniqueId uniqueId { get; set; }
     }
 
-    public class Id
+    internal class Id
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class Image
+    internal class Image
     {
         public Guids guids { get; set; }
         public Url url { get; set; }
@@ -379,7 +374,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public ListId listId { get; set; }
     }
 
-    public class Image3
+    internal class Image3
     {
         public SiteId siteId { get; set; }
         public WebId webId { get; set; }
@@ -388,23 +383,23 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public Url url { get; set; }
     }
 
-    public class ImageSource2
+    internal class ImageSource2
     {
         public bool spfxImageSource { get; set; }
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class ImageURL
+    internal class ImageURL
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class ImageUrl2
+    internal class ImageUrl2
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class Item
+    internal class Item
     {
         [JsonPropertyName("@odata.context")]
         public string OdataContext { get; set; }
@@ -454,7 +449,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string GUID { get; set; }
     }
 
-    public class Item2
+    internal class Item2
     {
         public Image image { get; set; }
         public SourceItem sourceItem { get; set; }
@@ -462,50 +457,50 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public RawPreviewImageUrl rawPreviewImageUrl { get; set; }
     }
 
-    public class ItemProperties
+    internal class ItemProperties
     {
     }
 
-    public class ItemReference
+    internal class ItemReference
     {
         public SiteId SiteId { get; set; }
         public WebId WebId { get; set; }
     }
     
-    public class LastListId
+    internal class LastListId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class LearningAssignmentsAce
+    internal class LearningAssignmentsAce
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class Link
+    internal class Link
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class LinkUrl
+    internal class LinkUrl
     {
         public bool spfxLink { get; set; }
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class ListId
+    internal class ListId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class ListPermsMask
+    internal class ListPermsMask
     {
         public int High { get; set; }
         public int Low { get; set; }
     }
 
-    public class LoaderConfig
+    internal class LoaderConfig
     {
         public List<string> internalModuleBaseUrls { get; set; }
         public string entryModuleId { get; set; }
@@ -513,7 +508,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string exportName { get; set; }
     }
 
-    public class Manifest
+    internal class Manifest
     {
         public PreloadOptions preloadOptions { get; set; }
         public Title title { get; set; }
@@ -541,430 +536,430 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public List<string> supportedHosts { get; set; }
     }
 
-    public class MenuData
+    internal class MenuData
     {
         public List<SettingsDatum> SettingsData { get; set; }
         public string SignOutUrl { get; set; }
     }
 
-    public class MicrosoftLoadThemedStyles
+    internal class MicrosoftLoadThemedStyles
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftOfficeUiFabricReactBundle
+    internal class MicrosoftOfficeUiFabricReactBundle
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpAdaptiveCardExtensionBase
+    internal class MicrosoftSpAdaptiveCardExtensionBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpApplicationBase
+    internal class MicrosoftSpApplicationBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpComponentBase
+    internal class MicrosoftSpComponentBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpCoreLibrary
+    internal class MicrosoftSpCoreLibrary
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpDiagnostics
+    internal class MicrosoftSpDiagnostics
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpDialog
+    internal class MicrosoftSpDialog
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpExtensionBase
+    internal class MicrosoftSpExtensionBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpHttp
+    internal class MicrosoftSpHttp
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpImageHelper
+    internal class MicrosoftSpImageHelper
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpLoader
+    internal class MicrosoftSpLoader
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpLodashSubset
+    internal class MicrosoftSpLodashSubset
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpPageContext
+    internal class MicrosoftSpPageContext
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpPropertyPane
+    internal class MicrosoftSpPropertyPane
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MicrosoftSpWebpartBase
+    internal class MicrosoftSpWebpartBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MixedReality
+    internal class MixedReality
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class MixedRealityResources
+    internal class MixedRealityResources
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class ModernAudienceTargeting
+    internal class ModernAudienceTargeting
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class MsI18nUtilities
+    internal class MsI18nUtilities
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsOdspCoreBundle
+    internal class MsOdspCoreBundle
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsOdspUtilitiesBundle
+    internal class MsOdspUtilitiesBundle
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpA11y
+    internal class MsSpA11y
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpAdaptiveCardExtensionIsolationComponentBase
+    internal class MsSpAdaptiveCardExtensionIsolationComponentBase
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpCanvasEditShared
+    internal class MsSpCanvasEditShared
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpCanvasRead
+    internal class MsSpCanvasRead
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpCarouselLayout
+    internal class MsSpCarouselLayout
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpCoachmarkUtility
+    internal class MsSpCoachmarkUtility
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpComponentUtilities
+    internal class MsSpComponentUtilities
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpCustomerPromise
+    internal class MsSpCustomerPromise
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpDataproviders
+    internal class MsSpDataproviders
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpDeferredComponent
+    internal class MsSpDeferredComponent
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpEditCustomerPromise
+    internal class MsSpEditCustomerPromise
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpEventDataProvider
+    internal class MsSpEventDataProvider
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpFlexLayout
+    internal class MsSpFlexLayout
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpGridLayout
+    internal class MsSpGridLayout
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpHeroLayout
+    internal class MsSpHeroLayout
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpHostCommandHandler
+    internal class MsSpHostCommandHandler
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpHtmlEmbed
+    internal class MsSpHtmlEmbed
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpListDocumentLayout
+    internal class MsSpListDocumentLayout
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpListviewCommon
+    internal class MsSpListviewCommon
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpLivePersonaCard
+    internal class MsSpLivePersonaCard
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpMwtCardsTelemetry
+    internal class MsSpMwtCardsTelemetry
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpMysitecache
+    internal class MsSpMysitecache
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpNewsDataProvider
+    internal class MsSpNewsDataProvider
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpPageChrome
+    internal class MsSpPageChrome
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpPagesAuthoringAreaDetector
+    internal class MsSpPagesAuthoringAreaDetector
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpPagesCore
+    internal class MsSpPagesCore
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpPagesPreloads
+    internal class MsSpPagesPreloads
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpRecommendedItems
+    internal class MsSpRecommendedItems
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpRichImage
+    internal class MsSpRichImage
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpRte
+    internal class MsSpRte
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpSearchCommon
+    internal class MsSpSearchCommon
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpSuiteNav
+    internal class MsSpSuiteNav
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpTelemetry
+    internal class MsSpTelemetry
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpTopicSdk
+    internal class MsSpTopicSdk
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpViewportLoader
+    internal class MsSpViewportLoader
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpWebpartShared
+    internal class MsSpWebpartShared
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsSpWebpartSharedEditmode
+    internal class MsSpWebpartSharedEditmode
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MsUifabricStylingBundle
+    internal class MsUifabricStylingBundle
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class MultiGeoInfo
+    internal class MultiGeoInfo
     {
         public string InstanceId { get; set; }
         public object DataLocation { get; set; }
@@ -976,85 +971,85 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public object AdditionalUrls { get; set; }
     }
 
-    public class MultilingualPages
+    internal class MultilingualPages
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class MultilingualResources
+    internal class MultilingualResources
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class MwtApprovalsAce
+    internal class MwtApprovalsAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class MwtCommunicationsAce
+    internal class MwtCommunicationsAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class MwtShiftsAce
+    internal class MwtShiftsAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class MwtTasksAce
+    internal class MwtTasksAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class Name
+    internal class Name
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class NavigationInfo
+    internal class NavigationInfo
     {
         public bool isAudienceTargeted { get; set; }
         public List<QuickLaunch> quickLaunch { get; set; }
         public List<object> topNav { get; set; }
     }
 
-    public class OfficeUiFabricReactBundle
+    internal class OfficeUiFabricReactBundle
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class OrganizationNewsSiteReference
+    internal class OrganizationNewsSiteReference
     {
         public string SiteId { get; set; }
         public string WebId { get; set; }
     }
 
-    public class Page
+    internal class Page
     {
         public bool DoesUserHaveEditPermission { get; set; }
         public Content Content { get; set; }
     }
 
-    public class PagePermsMask
+    internal class PagePermsMask
     {
         public int High { get; set; }
         public int Low { get; set; }
     }
 
-    public class Parameters
+    internal class Parameters
     {
         public string target { get; set; }
         public string view { get; set; }
     }
 
-    public class Perf
+    internal class Perf
     {
         public string IisLatency { get; set; }
         public string spRequestDuration { get; set; }
@@ -1066,14 +1061,14 @@ namespace SkolplattformenElevApi.Models.Sharepoint
 
     }
 
-    public class Person
+    internal class Person
     {
         public Id id { get; set; }
         public Email email { get; set; }
         public Name name { get; set; }
     }
 
-    public class PreconfiguredEntry
+    internal class PreconfiguredEntry
     {
         public Title title { get; set; }
         public Description description { get; set; }
@@ -1085,7 +1080,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string cardSize { get; set; }
     }
 
-    public class PreloadOptions
+    internal class PreloadOptions
     {
         public bool shouldPreloadUser { get; set; }
         public bool shouldPreloadItem { get; set; }
@@ -1095,7 +1090,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public List<string> preloadListItemProperties { get; set; }
     }
 
-    public class PreviewImage
+    internal class PreviewImage
     {
         public Url url { get; set; }
         public ResolvedUrl resolvedUrl { get; set; }
@@ -1106,13 +1101,13 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public ListId listId { get; set; }
     }
 
-    public class PreviousKey
+    internal class PreviousKey
     {
         public string Key { get; set; }
         public string Date { get; set; }
     }
 
-    public class Properties2
+    internal class Properties2
     {
         public string label { get; set; }
         public string annotation { get; set; }
@@ -1210,18 +1205,18 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string graphRequestUrl { get; set; }
     }
 
-    public class PropertiesMetadata
+    internal class PropertiesMetadata
     {
         public Current current { get; set; }
     }
 
-    public class Publishing
+    internal class Publishing
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class QuickLaunch
+    internal class QuickLaunch
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -1236,7 +1231,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public object OpenInNewWindow { get; set; }
     }
 
-    public class QuickView
+    internal class QuickView
     {
         public string data { get; set; }
         public string template { get; set; }
@@ -1244,40 +1239,40 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string displayName { get; set; }
     }
 
-    public class RawPreviewImageUrl
+    internal class RawPreviewImageUrl
     {
         public SpfxDependency spfxDependency { get; set; }
         public bool spfxImageSource { get; set; }
     }
 
-    public class React
+    internal class React
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class ReactDom
+    internal class ReactDom
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class RecommendedItems
+    internal class RecommendedItems
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class ResolvedUrl
+    internal class ResolvedUrl
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class NewsItemResponse
+    internal class NewsItemResponse
     {
-        public User user { get; set; }
+        public InternalUser user { get; set; }
         public Item item { get; set; }
         public ItemProperties itemProperties { get; set; }
         public Page page { get; set; }
@@ -1300,13 +1295,13 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool MediaTAForThumbnail { get; set; }
     }
 
-    public class SavedforlaterWebpart
+    internal class SavedforlaterWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class ScriptResources
+    internal class ScriptResources
     {
         [JsonPropertyName("sp-pages")]
         public SpPages SpPages { get; set; }
@@ -1635,154 +1630,154 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public Tslib2Bundle Tslib2Bundle { get; set; }
     }
 
-    public class SelectedListId
+    internal class SelectedListId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class SelectedListUrl
+    internal class SelectedListUrl
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class SelectedViewId
+    internal class SelectedViewId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class SettingsDatum
+    internal class SettingsDatum
     {
         public string Id { get; set; }
         public string Text { get; set; }
         public string Url { get; set; }
     }
 
-    public class ShowNewsMetadata
+    internal class ShowNewsMetadata
     {
         public bool showSocialActions { get; set; }
         public bool showAuthor { get; set; }
         public bool showDate { get; set; }
     }
 
-    public class Site
+    internal class Site
     {
         public ItemReference ItemReference { get; set; }
         public Url Url { get; set; }
     }
 
-    public class SiteId
+    internal class SiteId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class SiteId2
+    internal class SiteId2
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class SitePagePublishing
+    internal class SitePagePublishing
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class SitePages
+    internal class SitePages
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class SitePagesResources
+    internal class SitePagesResources
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class SitePagesScheduling
+    internal class SitePagesScheduling
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class SitePagesSchedulingResources
+    internal class SitePagesSchedulingResources
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class SourceItem
+    internal class SourceItem
     {
         public Guids guids { get; set; }
         public Url url { get; set; }
     }
 
-    public class SpAdaptiveCardExtensionWebPart
+    internal class SpAdaptiveCardExtensionWebPart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpAnchor
+    internal class SpAnchor
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpApplicationBase
+    internal class SpApplicationBase
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpBingmap
+    internal class SpBingmap
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class SpCanvasEdit
+    internal class SpCanvasEdit
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpContentrollupWebpart
+    internal class SpContentrollupWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpCustommessageregionBundle
+    internal class SpCustommessageregionBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpDataproviders
+    internal class SpDataproviders
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpEventsWebpart
+    internal class SpEventsWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpFeedvideoWebpart
+    internal class SpFeedvideoWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpFileviewerWebparts
+    internal class SpFileviewerWebparts
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpfxDependency
+    internal class SpfxDependency
     {
         public string dependencyType { get; set; }
         public string identifierType { get; set; }
@@ -1791,97 +1786,97 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public object name { get; set; }
     }
 
-    public class SpHeroWebpartBundle
+    internal class SpHeroWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpImageGalleryWebpartBundle
+    internal class SpImageGalleryWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpImageTools
+    internal class SpImageTools
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpImageWebpartBundle
+    internal class SpImageWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpIsolatedAdaptiveCardExtensionWebPart
+    internal class SpIsolatedAdaptiveCardExtensionWebPart
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class SpLinkpreviewWebpart
+    internal class SpLinkpreviewWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpListHost
+    internal class SpListHost
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpListWebpart
+    internal class SpListWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpMultilingual
+    internal class SpMultilingual
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpMyDocumentsWebpart
+    internal class SpMyDocumentsWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpNewsfeedWebpartBundle
+    internal class SpNewsfeedWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpNewslinkWebpart
+    internal class SpNewslinkWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpNewsreelWebpartBundle
+    internal class SpNewsreelWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpNewsWebpartBundle
+    internal class SpNewsWebpartBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpPageCards
+    internal class SpPageCards
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpPageContextInfo
+    internal class SpPageContextInfo
     {
         public int ListCountLimit { get; set; }
         public int FieldCountLimit { get; set; }
@@ -2136,85 +2131,85 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool isLabelIRMEnabled { get; set; }
     }
 
-    public class SpPages
+    internal class SpPages
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpPagesPreloads
+    internal class SpPagesPreloads
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpPeopleWebpartsBundle
+    internal class SpPeopleWebpartsBundle
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpQuickLinksWebpart
+    internal class SpQuickLinksWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpRecommendeditemsWebpart
+    internal class SpRecommendeditemsWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpSafehtml
+    internal class SpSafehtml
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class SpSearch
+    internal class SpSearch
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpSearchCommon
+    internal class SpSearchCommon
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpSiteactivityWebpart
+    internal class SpSiteactivityWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpTelemetry
+    internal class SpTelemetry
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class SpTitleRegionWebpart
+    internal class SpTitleRegionWebpart
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpToolbox
+    internal class SpToolbox
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class SpTopicShared
+    internal class SpTopicShared
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class StandardDate
+    internal class StandardDate
     {
         public int Year { get; set; }
         public int Month { get; set; }
@@ -2226,7 +2221,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public int Milliseconds { get; set; }
     }
 
-    public class Strings
+    internal class Strings
     {
         public string name { get; set; }
         public string nav { get; set; }
@@ -2239,13 +2234,13 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string lists { get; set; }
     }
 
-    public class TeamsAce
+    internal class TeamsAce
     {
         public string type { get; set; }
         public string defaultPath { get; set; }
     }
 
-    public class ThemedImageFileNames
+    internal class ThemedImageFileNames
     {
         [JsonPropertyName("spcommon.png")]
         public string SpcommonPng { get; set; }
@@ -2263,44 +2258,44 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string SpnavPng { get; set; }
     }
 
-    public class Title
+    internal class Title
     {
         public string @default { get; set; }
         public bool spfxSearchablePlainText { get; set; }
     }
 
-    public class Tslib
+    internal class Tslib
     {
         public string type { get; set; }
         public string id { get; set; }
         public string version { get; set; }
     }
 
-    public class Tslib2Bundle
+    internal class Tslib2Bundle
     {
         public string type { get; set; }
         public string path { get; set; }
     }
 
-    public class UniqueId
+    internal class UniqueId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class Url
+    internal class Url
     {
         public SpfxDependency spfxDependency { get; set; }
         public bool spfxLink { get; set; }
     }
 
-    public class Url2
+    internal class Url2
     {
         public SpfxDependency spfxDependency { get; set; }
         public bool spfxImageSource { get; set; }
         public bool spfxLink { get; set; }
     }
 
-    public class User
+    internal class InternalUser
     {
         [JsonPropertyName("@odata.context")]
         public string OdataContext { get; set; }
@@ -2327,50 +2322,50 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string UserPrincipalName { get; set; }
     }
 
-    public class UserId
+    internal class UserId
     {
         public string NameId { get; set; }
         public string NameIdIssuer { get; set; }
     }
 
-    public class UserInfo
+    internal class UserInfo
     {
         public string _AuthorByline { get; set; }
         public object CheckoutUser { get; set; }
     }
 
-    public class VanityUrls
+    internal class VanityUrls
     {
     }
 
-    public class Viewers
+    internal class Viewers
     {
         public int Version { get; set; }
         public bool Enabled { get; set; }
     }
 
-    public class WebId
+    internal class WebId
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class WebId2
+    internal class WebId2
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class WebPermMasks
+    internal class WebPermMasks
     {
         public int High { get; set; }
         public int Low { get; set; }
     }
 
-    public class WebRelativeListUrl
+    internal class WebRelativeListUrl
     {
         public SpfxDependency spfxDependency { get; set; }
     }
 
-    public class WebTimeZoneData
+    internal class WebTimeZoneData
     {
         public string Description { get; set; }
         public int Bias { get; set; }

@@ -1,12 +1,13 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
-using SkolplattformenElevApi.Models.Absence;
+using SkolplattformenElevApi.Models;
+using SkolplattformenElevApi.Models.Internal.Absence;
 
 namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task AbsenceSsoLogin()
+    private async Task AbsenceSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
         
@@ -90,7 +91,7 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<PlannedAbsence>?> GetPlannedAbsenceList()
+    public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
     {
         await GetAbsenceUserInfo();
         var guid = await GetPlannedAbsenceUserGuid();
@@ -125,7 +126,29 @@ public partial class Api
 
         var authorizeResponse = JsonSerializer.Deserialize<PlannedAbsenceResponse>(temp_content, jsonSerializerOptions);
 
-        return authorizeResponse?.Data?.PlannedAbsences;
+        if (authorizeResponse?.Data?.PlannedAbsences == null)
+        {
+            return new List<PlannedAbsenceItem>();
+        }
+
+        var absenceList = new List<PlannedAbsenceItem>();
+        foreach (var pa in authorizeResponse.Data.PlannedAbsences)
+        {
+            absenceList.Add(new PlannedAbsenceItem
+            {
+                Created = pa.AbsenceCreationTime,
+                AbsenceId = pa.AbsenceId!,
+                Comment = pa.Comment ?? string.Empty,
+                DateTimeFrom = pa.DateTimeFrom,
+                DateTimeTo = pa.DateTimeTo,
+                IsFullDayAbsence = pa.IsFullDayAbsence,
+                ReasonDescription = pa.ReasonDescription ?? string.Empty,
+                Reporter = pa.Reporter ?? string.Empty
+
+            });
+        }
+
+        return absenceList;
     }
 }
 
