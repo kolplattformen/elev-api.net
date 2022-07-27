@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.Internal.Timetable;
 
 namespace SkolplattformenElevApi;
@@ -105,7 +106,7 @@ public partial class Api
         return key;
     }
 
-    public async Task<List<LessonInfo>?> GetTimetable(int year, int week)
+    public async Task<List<ApiTimeTableLesson>> GetTimetable(int year, int week)
     {
         var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
         var key = await GetTimetableRenderKey();
@@ -140,7 +141,28 @@ public partial class Api
 
         var authorizeResponse = JsonSerializer.Deserialize<TimetableRenderResponse>(temp_content, jsonSerializerOptions);
 
-        return authorizeResponse?.Data?.LessonInfo;
+        if (authorizeResponse?.Data?.LessonInfo == null)
+        {
+            return new List<ApiTimeTableLesson>();
+        }
+
+        var lessonList = new List<ApiTimeTableLesson>();
+        foreach (var item in authorizeResponse.Data.LessonInfo)
+        {
+            lessonList.Add(new ApiTimeTableLesson
+            {
+                DayOfWeekNumber = item.DayOfWeekNumber,
+                TimeStart = item.TimeStart,
+                TimeEnd = item.TimeEnd,
+                LessonCode = item.Texts[0],
+                LessonName = item.Texts[0],
+                TeacherCode = item.Texts[1],
+                TeacherName = item.Texts[1],
+                Location = item.Texts[2]
+            });
+        }
+
+        return lessonList;
     }
 }
 

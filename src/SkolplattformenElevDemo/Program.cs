@@ -37,7 +37,7 @@ var lessonInfo = await api.GetTimetable(2022, 37);
 
 foreach (var info in lessonInfo)
 {
-    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.Texts[0]} {info.Texts[1]} {info.Texts[2]} ");
+    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.LessonName} {info.TeacherName} {info.Location} ");
 }
 
 
@@ -57,13 +57,13 @@ Console.WriteLine(user.Name);
 Console.WriteLine("\n----- School ------");
 
 var school = await api.GetSchoolAsync(user.Schools.First().ExternalId);
-Console.WriteLine($"{school.SchoolName} ");
+Console.WriteLine($"{school.Name} ");
 
 var teachers = await api.GetTeachersAsync();
 Console.WriteLine("\n----- Teachers ------");
 foreach (var teacher in teachers)
 {
-    Console.WriteLine($"{teacher.FIRSTNAME} {teacher.LASTNAME} {teacher.EMAILADDRESS}");
+    Console.WriteLine($"{teacher.Firstname} {teacher.Lastname} {teacher.Email}");
 }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.Internal.Absence;
 
 namespace SkolplattformenElevApi;
@@ -90,7 +91,7 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<PlannedAbsence>?> GetPlannedAbsenceList()
+    public async Task<List<ApiPlannedAbsenceItem>?> GetPlannedAbsenceList()
     {
         await GetAbsenceUserInfo();
         var guid = await GetPlannedAbsenceUserGuid();
@@ -125,7 +126,29 @@ public partial class Api
 
         var authorizeResponse = JsonSerializer.Deserialize<PlannedAbsenceResponse>(temp_content, jsonSerializerOptions);
 
-        return authorizeResponse?.Data?.PlannedAbsences;
+        if (authorizeResponse?.Data?.PlannedAbsences == null)
+        {
+            return new List<ApiPlannedAbsenceItem>();
+        }
+
+        var absenceList = new List<ApiPlannedAbsenceItem>();
+        foreach (var pa in authorizeResponse.Data.PlannedAbsences)
+        {
+            absenceList.Add(new ApiPlannedAbsenceItem
+            {
+                Created = pa.AbsenceCreationTime,
+                AbsenceId = pa.AbsenceId!,
+                Comment = pa.Comment ?? string.Empty,
+                DateTimeFrom = pa.DateTimeFrom,
+                DateTimeTo = pa.DateTimeTo,
+                IsFullDayAbsence = pa.IsFullDayAbsence,
+                ReasonDescription = pa.ReasonDescription ?? string.Empty,
+                Reporter = pa.Reporter ?? string.Empty
+
+            });
+        }
+
+        return absenceList;
     }
 }
 
