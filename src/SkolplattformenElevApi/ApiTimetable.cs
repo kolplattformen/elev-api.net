@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
-using SkolplattformenElevApi.Models.Absence;
-using SkolplattformenElevApi.Models.Timetable;
+using SkolplattformenElevApi.Models.Internal.Timetable;
 
 namespace SkolplattformenElevApi;
 

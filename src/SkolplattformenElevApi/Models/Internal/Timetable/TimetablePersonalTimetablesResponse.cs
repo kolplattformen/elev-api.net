@@ -1,4 +1,4 @@
-﻿namespace SkolplattformenElevApi.Models.Timetable;
+﻿namespace SkolplattformenElevApi.Models.Internal.Timetable;
 
 // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 public class PersonalTimetableData

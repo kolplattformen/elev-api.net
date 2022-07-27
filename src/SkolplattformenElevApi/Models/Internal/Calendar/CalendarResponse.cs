@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SkolplattformenElevApi.Models.Calendar;
+namespace SkolplattformenElevApi.Models.Internal.Calendar;
 
 // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
 public class CalendarItem

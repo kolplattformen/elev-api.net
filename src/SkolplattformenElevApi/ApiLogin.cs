@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Web;
-using SkolplattformenElevApi.Models.Login;
+using SkolplattformenElevApi.Models.Internal.Login;
 
 namespace SkolplattformenElevApi
 {

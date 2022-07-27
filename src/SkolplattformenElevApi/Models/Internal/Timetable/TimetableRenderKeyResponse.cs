@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkolplattformenElevApi.Models.Timetable;
+﻿namespace SkolplattformenElevApi.Models.Internal.Timetable;
 public class TimetableRenderKeyData
 {
     public string Key { get; set; }

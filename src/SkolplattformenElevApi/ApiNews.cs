@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using SkolplattformenElevApi.Models.Internal.Sharepoint;
 using SkolplattformenElevApi.Models.News;
-using SkolplattformenElevApi.Models.Sharepoint;
 
 namespace SkolplattformenElevApi
 {
@@ -107,7 +107,7 @@ namespace SkolplattformenElevApi
             return html;
         }
 
-        private NewsListItem RowToNewsListItem(Models.Sharepoint.Row row)
+        private NewsListItem RowToNewsListItem(Row row)
         {
             return new NewsListItem
             {

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Web;
-using SkolplattformenElevApi.Models.Calendar;
+using SkolplattformenElevApi.Models.Internal.Calendar;
 
 namespace SkolplattformenElevApi;
 
