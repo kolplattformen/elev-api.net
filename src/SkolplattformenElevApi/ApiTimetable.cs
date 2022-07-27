@@ -1,13 +1,13 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
-using SkolplattformenElevApi.Models.Absence;
-using SkolplattformenElevApi.Models.Timetable;
+using SkolplattformenElevApi.Models;
+using SkolplattformenElevApi.Models.Internal.Timetable;
 
 namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task TimetableSsoLogin()
+    private async Task TimetableSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=TimetableViewer";
         
@@ -106,7 +106,7 @@ public partial class Api
         return key;
     }
 
-    public async Task<List<LessonInfo>?> GetTimetable(int year, int week)
+    public async Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
     {
         var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
         var key = await GetTimetableRenderKey();
@@ -141,7 +141,28 @@ public partial class Api
 
         var authorizeResponse = JsonSerializer.Deserialize<TimetableRenderResponse>(temp_content, jsonSerializerOptions);
 
-        return authorizeResponse?.Data?.LessonInfo;
+        if (authorizeResponse?.Data?.LessonInfo == null)
+        {
+            return new List<TimeTableLesson>();
+        }
+
+        var lessonList = new List<TimeTableLesson>();
+        foreach (var item in authorizeResponse.Data.LessonInfo)
+        {
+            lessonList.Add(new TimeTableLesson
+            {
+                DayOfWeekNumber = item.DayOfWeekNumber,
+                TimeStart = item.TimeStart,
+                TimeEnd = item.TimeEnd,
+                LessonCode = item.Texts[0],
+                LessonName = item.Texts[0],
+                TeacherCode = item.Texts[1],
+                TeacherName = item.Texts[1],
+                Location = item.Texts[2]
+            });
+        }
+
+        return lessonList;
     }
 }
 

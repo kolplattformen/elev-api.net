@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkolplattformenElevApi.Models.Sharepoint
+﻿namespace SkolplattformenElevApi.Models.Internal.Sharepoint
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
-    public class CustomMetadata
+    internal class CustomMetadata
     {
         public ImageSource imageSource { get; set; }
     }
 
-    public class HtmlStrings
+    internal class HtmlStrings
     {
     }
 
-    public class ImageSource
+    internal class ImageSource
     {
         public string siteid { get; set; }
         public string webid { get; set; }
@@ -26,23 +20,23 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public string height { get; set; }
     }
 
-    public class ImageSources
+    internal class ImageSources
     {
         public string imageSource { get; set; }
     }
 
-    public class Links
+    internal class Links
     {
     }
 
-    public class PageSettingsSlice
+    internal class PageSettingsSlice
     {
         public bool isDefaultDescription { get; set; }
         public bool isDefaultThumbnail { get; set; }
         public bool isSpellCheckEnabled { get; set; }
     }
 
-    public class Position
+    internal class Position
     {
         public int controlIndex { get; set; }
         public int sectionIndex { get; set; }
@@ -51,7 +45,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public int layoutIndex { get; set; }
     }
 
-    public class Properties
+    internal class Properties
     {
         public int imageSourceType { get; set; }
         public string altText { get; set; }
@@ -68,7 +62,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public bool fixAspectRatio { get; set; }
     }
 
-    public class CanvasContent
+    internal class CanvasContent
     {
         public int controlType { get; set; }
         public string id { get; set; }
@@ -82,12 +76,12 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public PageSettingsSlice pageSettingsSlice { get; set; }
     }
 
-    public class SearchablePlainTexts
+    internal class SearchablePlainTexts
     {
         public string captionText { get; set; }
     }
 
-    public class ServerProcessedContent
+    internal class ServerProcessedContent
     {
         public HtmlStrings htmlStrings { get; set; }
         public SearchablePlainTexts searchablePlainTexts { get; set; }
@@ -96,7 +90,7 @@ namespace SkolplattformenElevApi.Models.Sharepoint
         public CustomMetadata customMetadata { get; set; }
     }
 
-    public class WebPartData
+    internal class WebPartData
     {
         public string id { get; set; }
         public string instanceId { get; set; }

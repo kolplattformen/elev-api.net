@@ -1,20 +1,20 @@
-﻿namespace SkolplattformenElevApi.Models.Timetable;
+﻿namespace SkolplattformenElevApi.Models.Internal.Timetable;
 
 // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-public class PersonalTimetableData
+internal class PersonalTimetableData
 {
     public object Errors { get; set; }
     public GetPersonalTimetablesResponse GetPersonalTimetablesResponse { get; set; }
 }
 
-public class GetPersonalTimetablesResponse
+internal class GetPersonalTimetablesResponse
 {
     public object TeacherTimetables { get; set; }
     public List<StudentTimetable> StudentTimetables { get; set; }
     public object ChildrenTimetables { get; set; }
 }
 
-public class TimetablePersonalTimetablesResponse
+internal class TimetablePersonalTimetablesResponse
 {
     public object Error { get; set; }
     public PersonalTimetableData Data { get; set; }
@@ -24,7 +24,7 @@ public class TimetablePersonalTimetablesResponse
     public bool NeedSessionRefresh { get; set; }
 }
 
-public class StudentTimetable
+internal class StudentTimetable
 {
     public string SchoolGuid { get; set; }
     public string UnitGuid { get; set; }

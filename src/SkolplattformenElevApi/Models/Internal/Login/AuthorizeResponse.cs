@@ -1,4 +1,4 @@
-﻿namespace SkolplattformenElevApi.Models.Login;
+﻿namespace SkolplattformenElevApi.Models.Internal.Login;
 
 internal class AuthorizeResponse
 {

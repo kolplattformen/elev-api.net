@@ -5,13 +5,17 @@ A POC for login (and maybe more) to the Skolplattformen Student portal written i
 The end goal is to create an app for students. This repo is used to find out the inner workings of all things Skolplattformen. It may or may not be a part of the final product.
 
 ## Current status
-Not much is wroking yet. Code is a mess. Don't bother unless you are here to try to make it work. 
+Some parts are working. Code is still a mess. Ongoing guesswork.... 
 
 ### Working parts
-* Login to the Sharepoint part, absence and timetable is working. Others untested.
+* Login to the Sharepoint part, AzureApi (calendar, user info), absence and timetable is working. Others untested.
 * Getting a list of news items and a single news item is partly done.
 * Getting absence list
 * Getting timetable
+* Getting calendar entries
+* Getting user info
+* Getting school info
+* Getting list och teachers
 
 ## Contribute / Try
 ### Prerequisites

@@ -1,4 +1,4 @@
-﻿namespace SkolplattformenElevApi.Models.Sharepoint
+﻿namespace SkolplattformenElevApi.Models.Internal.Sharepoint
 {
 
     // Root myDeserializedClass = JsonConvert.DeserializeObject<PostQueryResponse>(myJsonResponse);
