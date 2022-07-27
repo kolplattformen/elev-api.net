@@ -1,11 +1,11 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.Absence;
 
-public class PlanedAbsenceData
+internal class PlanedAbsenceData
 {
     public List<PlannedAbsence>? PlannedAbsences { get; set; }
 }
 
-public class PlannedAbsence
+internal class PlannedAbsence
 {
     public string? AbsenceId { get; set; }
     public int Week { get; set; }
@@ -31,7 +31,7 @@ public class PlannedAbsence
     public string? ReasonDescription { get; set; }
 }
 
-public class PlannedAbsenceResponse
+internal class PlannedAbsenceResponse
 {
     public object? Error { get; set; }
     public PlanedAbsenceData? Data { get; set; }

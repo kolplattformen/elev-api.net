@@ -1,6 +1,6 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.Timetable;
 // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-//public class BoxList
+//internal class BoxList
 //{
 //    public int X { get; set; }
 //    public int Y { get; set; }
@@ -14,7 +14,7 @@
 //    public List<string> LessonGuids { get; set; }
 //}
 
-public class TimetableRenderData
+internal class TimetableRenderData
 {
 //    public List<TextList> TextList { get; set; }
 //    public List<BoxList> BoxList { get; set; }
@@ -22,7 +22,7 @@ public class TimetableRenderData
     public List<LessonInfo> LessonInfo { get; set; }
 }
 
-public class LessonInfo
+internal class LessonInfo
 {
     public string GuidId { get; set; }
     public string[] Texts { get; set; }
@@ -32,7 +32,7 @@ public class LessonInfo
     public string BlockName { get; set; }
 }
 
-//public class LineList
+//internal class LineList
 //{
 //    public int P1x { get; set; }
 //    public int P1y { get; set; }
@@ -44,7 +44,7 @@ public class LessonInfo
 //    public string Type { get; set; }
 //}
 
-public class TimetableRenderResponse
+internal class TimetableRenderResponse
 {
     public object Error { get; set; }
     public TimetableRenderData Data { get; set; }
@@ -54,7 +54,7 @@ public class TimetableRenderResponse
     public bool NeedSessionRefresh { get; set; }
 }
 
-//public class TextList
+//internal class TextList
 //{
 //    public int X { get; set; }
 //    public int Y { get; set; }

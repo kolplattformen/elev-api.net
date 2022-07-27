@@ -1,12 +1,12 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.Absence;
 
 // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-public class CurrentUserGuidData
+internal class CurrentUserGuidData
 {
     public string CurrentUserGuid { get; set; }
 }
 
-public class CurrentUserGuidResponse
+internal class CurrentUserGuidResponse
 {
     public object Error { get; set; }
     public CurrentUserGuidData Data { get; set; }

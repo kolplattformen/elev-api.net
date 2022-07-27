@@ -3,7 +3,7 @@
 namespace SkolplattformenElevApi.Models.Internal.Calendar;
 
 // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
-public class CalendarItem
+internal class CalendarItem
 {
     [JsonPropertyName("id")]
     public string Id { get; set; }

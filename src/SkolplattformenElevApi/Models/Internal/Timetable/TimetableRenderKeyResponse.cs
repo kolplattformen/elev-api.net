@@ -1,10 +1,10 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.Timetable;
-public class TimetableRenderKeyData
+internal class TimetableRenderKeyData
 {
     public string Key { get; set; }
 }
 
-public class TimetableRenderKeyResponse
+internal class TimetableRenderKeyResponse
 {
     public object Error { get; set; }
     public TimetableRenderKeyData Data { get; set; }
