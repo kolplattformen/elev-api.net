@@ -1,6 +1,6 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.StockholmAzureApi
 {
-    internal class SchoolDetails
+    internal class SchoolDetailsData
     {
         public string ExternalId { get; set; }
         public string SchoolName { get; set; }
@@ -24,7 +24,7 @@
     {
         public bool Success { get; set; }
         public object Error { get; set; }
-        public SchoolDetails Data { get; set; }
+        public SchoolDetailsData Data { get; set; }
     }
 
 }

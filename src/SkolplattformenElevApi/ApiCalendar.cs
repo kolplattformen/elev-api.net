@@ -79,7 +79,7 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
     }
 
 
-    public async Task<List<ApiCalendarItem>> GetCalendarAsync(DateOnly date)
+    public async Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
     {
 
         var token = await GetAzureApiAccessTokenAsync();
@@ -108,13 +108,13 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
 
         if (deserialized?.Data == null)
         {
-            return new List<ApiCalendarItem>();
+            return new List<CalendarItem>();
         }
 
-        var calendarItemList = new List<ApiCalendarItem>();
+        var calendarItemList = new List<CalendarItem>();
         foreach (var item in deserialized.Data)
         {
-            calendarItemList.Add(new ApiCalendarItem
+            calendarItemList.Add(new CalendarItem
             {
                 Id = item.Id,
                 Title = item.Title,

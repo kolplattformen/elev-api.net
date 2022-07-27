@@ -1,6 +1,6 @@
 ﻿namespace SkolplattformenElevApi.Models.Internal.StockholmAzureApi
 {
-    internal class Teacher
+    internal class TeacherData
     {
         public int ID { get; set; }
         public string BATCH { get; set; }
@@ -21,7 +21,7 @@
     {
         public bool Success { get; set; }
         public object Error { get; set; }
-        public List<Teacher> Data { get; set; }
+        public List<TeacherData> Data { get; set; }
     }
 
     internal class Section

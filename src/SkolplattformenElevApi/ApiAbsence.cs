@@ -91,7 +91,7 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<ApiPlannedAbsenceItem>?> GetPlannedAbsenceList()
+    public async Task<List<PlannedAbsenceItem>?> GetPlannedAbsenceList()
     {
         await GetAbsenceUserInfo();
         var guid = await GetPlannedAbsenceUserGuid();
@@ -128,13 +128,13 @@ public partial class Api
 
         if (authorizeResponse?.Data?.PlannedAbsences == null)
         {
-            return new List<ApiPlannedAbsenceItem>();
+            return new List<PlannedAbsenceItem>();
         }
 
-        var absenceList = new List<ApiPlannedAbsenceItem>();
+        var absenceList = new List<PlannedAbsenceItem>();
         foreach (var pa in authorizeResponse.Data.PlannedAbsences)
         {
-            absenceList.Add(new ApiPlannedAbsenceItem
+            absenceList.Add(new PlannedAbsenceItem
             {
                 Created = pa.AbsenceCreationTime,
                 AbsenceId = pa.AbsenceId!,

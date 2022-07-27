@@ -52,7 +52,7 @@ public partial class Api
         };
         foreach (var s in u.Schools)
         {
-            user.Schools.Add(new ApiSchool
+            user.Schools.Add(new School
             {
                 ExternalId = Guid.Parse(s.ExternalId),
                 Name = s.DisplayName,
@@ -65,7 +65,7 @@ public partial class Api
     }
 
 
-    public async Task<List<ApiTeacher>> GetTeachersAsync()
+    public async Task<List<Teacher>> GetTeachersAsync()
     {
 
         var token = await GetAzureApiAccessTokenAsync();
@@ -94,15 +94,15 @@ public partial class Api
 
         if (deserialized?.Data == null)
         {
-            return new List<ApiTeacher>();
+            return new List<Teacher>();
         }
 
-        var teacherList = new List<ApiTeacher>();
+        var teacherList = new List<Teacher>();
         foreach (var item in deserialized.Data)
         {
             if (teacherList.All(t => t.Id != item.ID))
             {
-                teacherList.Add(new ApiTeacher
+                teacherList.Add(new Teacher
                 {
                     Id = item.ID,
                     Firstname = item.FIRSTNAME,
@@ -115,7 +115,7 @@ public partial class Api
         return teacherList;
     }
 
-    public async Task<ApiSchoolDetails?> GetSchoolAsync(Guid schoolId)
+    public async Task<SchoolDetails?> GetSchoolAsync(Guid schoolId)
     {
 
         var token = await GetAzureApiAccessTokenAsync();
@@ -149,7 +149,7 @@ public partial class Api
         }
 
         var s = deserialized.Data;
-        var schoolDetails = new ApiSchoolDetails
+        var schoolDetails = new SchoolDetails
         {
             //Id = deserialized.Data.
             ExternalId = Guid.Parse(s.ExternalId),

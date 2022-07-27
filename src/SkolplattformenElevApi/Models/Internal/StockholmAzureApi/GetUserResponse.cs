@@ -9,7 +9,7 @@
         public string UserType { get; set; }
         public string ExternalId { get; set; }
         public string UPN { get; set; }
-        public List<School> Schools { get; set; }
+        public List<UserSchoolData> Schools { get; set; }
     }
 
     internal class GetUserResponse
@@ -19,7 +19,7 @@
         public UserData Data { get; set; }
     }
 
-    internal class School
+    internal class UserSchoolData
     {
         public string Id { get; set; }
         public string DisplayName { get; set; }

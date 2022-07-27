@@ -106,7 +106,7 @@ public partial class Api
         return key;
     }
 
-    public async Task<List<ApiTimeTableLesson>> GetTimetable(int year, int week)
+    public async Task<List<TimeTableLesson>> GetTimetable(int year, int week)
     {
         var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
         var key = await GetTimetableRenderKey();
@@ -143,13 +143,13 @@ public partial class Api
 
         if (authorizeResponse?.Data?.LessonInfo == null)
         {
-            return new List<ApiTimeTableLesson>();
+            return new List<TimeTableLesson>();
         }
 
-        var lessonList = new List<ApiTimeTableLesson>();
+        var lessonList = new List<TimeTableLesson>();
         foreach (var item in authorizeResponse.Data.LessonInfo)
         {
-            lessonList.Add(new ApiTimeTableLesson
+            lessonList.Add(new TimeTableLesson
             {
                 DayOfWeekNumber = item.DayOfWeekNumber,
                 TimeStart = item.TimeStart,

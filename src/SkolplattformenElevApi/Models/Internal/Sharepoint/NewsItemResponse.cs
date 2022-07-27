@@ -1272,7 +1272,7 @@ namespace SkolplattformenElevApi.Models.Internal.Sharepoint
 
     internal class NewsItemResponse
     {
-        public User user { get; set; }
+        public InternalUser user { get; set; }
         public Item item { get; set; }
         public ItemProperties itemProperties { get; set; }
         public Page page { get; set; }
@@ -2295,7 +2295,7 @@ namespace SkolplattformenElevApi.Models.Internal.Sharepoint
         public bool spfxLink { get; set; }
     }
 
-    internal class User
+    internal class InternalUser
     {
         [JsonPropertyName("@odata.context")]
         public string OdataContext { get; set; }
