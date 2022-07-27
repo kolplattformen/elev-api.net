@@ -91,7 +91,7 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<PlannedAbsenceItem>?> GetPlannedAbsenceListAsync()
+    public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
     {
         await GetAbsenceUserInfo();
         var guid = await GetPlannedAbsenceUserGuid();
