@@ -115,7 +115,7 @@ public partial class Api
         return teacherList;
     }
 
-    public async Task<SchoolDetails?> GetSchoolAsync(Guid schoolId)
+    public async Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId)
     {
 
         var token = await GetAzureApiAccessTokenAsync();

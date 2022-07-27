@@ -8,7 +8,7 @@ namespace SkolplattformenElevApi
 {
     public partial class Api
     {
-        public async Task LogIn(string email, string username, string password)
+        public async Task LogInAsync(string email, string username, string password)
         {
 
             var jsonSerializerOptions = new JsonSerializerOptions
@@ -28,10 +28,7 @@ namespace SkolplattformenElevApi
             temp_url = "https://elevstockholm.sharepoint.com/_forms/default.aspx?ReturnUrl=%2fsites%2fskolplattformen%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252Fsites%252Fskolplattformen%252F&Source=cookie";
             temp_res = await _httpClient.GetAsync(temp_url);
 
-            // temp_url="" 
             temp_url = temp_res.Headers.Location?.ToString();
-            //TODO: Get nonce from above redirect
-            var nonce = new Uri(temp_url).Query.Split("&").First(x => x.StartsWith("nonce=")).Split("=")[1];
             temp_res = await _httpClient.GetAsync(temp_url);
 
             // temp_url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&protectedtoken=true&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=D183A6ABC1D1AC7C936304BB86DF8DAC910B49EBC59F2480-DAC0A994AB24A884A2F5B50818B527241CDB7D3431E47CA861C947015C5C1F6F&redirect_uri=https%3A%2F%2Felevstockholm.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=7a323fa0-c071-4000-4218-a4696e60d3c2";
@@ -181,25 +178,7 @@ namespace SkolplattformenElevApi
             json = RegExp("\\$Config=(.*});", temp_content);
             var loginSrfAnswer = JsonSerializer.Deserialize<LoginSrfAnswer>(json, jsonSerializerOptions);
 
-
             _cookieContainer.Add(new Cookie("ESTSWCTXFLOWTOKEN", null, "/", "login.microsoftonline.com"));
-
-
-            //_cookieContainer.Add(new Cookie("AADSSO", "NA|NoExtension", "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("brcap", "0", "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("clrc", null, "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("ESTSAUTHPERSISTENT", null, "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("ESTSAUTH", null, "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("ESTSAUTHLIGHT", null, "/", "login.microsoftonline.com"));
-
-            //_cookieContainer.Add(new Cookie("ch", null, "/", "login.microsoftonline.com"));
-            //_cookieContainer.Add(new Cookie("ESTSSC", "00", "/", "login.microsoftonline.com"));
-
-
-
-            var ccccc = _cookieContainer.GetAllCookies();
-            // We are here. 
-            //TODO: previous page (login.srf) loads some javascript files that populates the parameters for next call
 
             temp_url = "https://login.microsoftonline.com/kmsi";
             temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
@@ -214,11 +193,6 @@ namespace SkolplattformenElevApi
         }));
 
             temp_content = await temp_res.Content.ReadAsStringAsync();
-
-
-            //temp_url = $"https://login.microsoftonline.com/kmsi?client-request-id={authStuff.correlationId}&sso_reload=True";
-            //temp_res = await _httpClient.PostAsync(temp_url,null);
-            //temp_content = await temp_res.Content.ReadAsStringAsync();
 
             var code = RegExp("\"code\\\" value=\\\"([^\\\"]*)\"", temp_content);
             var id_token = HttpUtility.HtmlDecode(RegExp("\"id_token\\\" value=\\\"([^\\\"]*)\"", temp_content));

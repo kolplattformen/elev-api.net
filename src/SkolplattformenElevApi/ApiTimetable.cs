@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task TimetableSsoLogin()
+    public async Task TimetableSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=TimetableViewer";
         
@@ -106,7 +106,7 @@ public partial class Api
         return key;
     }
 
-    public async Task<List<TimeTableLesson>> GetTimetable(int year, int week)
+    public async Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
     {
         var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
         var key = await GetTimetableRenderKey();

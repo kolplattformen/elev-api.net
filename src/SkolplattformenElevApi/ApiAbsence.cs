@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task AbsenceSsoLogin()
+    public async Task AbsenceSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
         
@@ -91,7 +91,7 @@ public partial class Api
         return guid;
     }
 
-    public async Task<List<PlannedAbsenceItem>?> GetPlannedAbsenceList()
+    public async Task<List<PlannedAbsenceItem>?> GetPlannedAbsenceListAsync()
     {
         await GetAbsenceUserInfo();
         var guid = await GetPlannedAbsenceUserGuid();

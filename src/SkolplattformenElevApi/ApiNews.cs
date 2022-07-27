@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi
 {
     public partial class Api
     {
-        public async Task<List<NewsListItem>> GetNewsItemList(int itemsToGet = 5)
+        public async Task<List<NewsListItem>> GetNewsItemListAsync(int itemsToGet = 5)
         {
             var query = "{ \"request\": {\"Querytext\":\"\",\"QueryTemplate\":\"{searchterms} -SiteTitle:\\\"Användarstöd\\\" AND (LastModifiedTime=\\\"this year\\\" OR LastModifiedTime=\\\"last year\\\") AND  ((ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118* AND PromotedState=2 AND NOT ContentTypeId:0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00873E381CC9DD4F2E808A377A72C311BB*))\",\"ClientType\":\"HighlightedContentWebPart\",\"RowLimit\":" + itemsToGet + ",\"RowsPerPage\":" + itemsToGet + ",\"TimeZoneId\":4,\"SelectProperties\":[\"ContentType\",\"ContentTypeId\",\"Title\",\"EditorOwsUser\",\"ModifiedBy\",\"LastModifiedBy\",\"FileExtension\",\"FileType\",\"Path\",\"SiteName\",\"SiteTitle\",\"PictureThumbnailURL\",\"DefaultEncodingURL\",\"LastModifiedTime\",\"ListID\",\"ListItemID\",\"SiteID\",\"WebId\",\"UniqueID\",\"LastModifiedTime\",\"SitePath\",\"UserName\",\"ProfileImageSrc\",\"Name\",\"Initials\",\"WebPath\",\"PreviewUrl\",\"IconUrl\",\"AccentColor\",\"CardType\",\"TipActionLabel\",\"TipActionButtonIcon\",\"ClassName\",\"TelemetryProperties\",\"ImageOverlapText\",\"ImageOverlapTextAriaLabel\",\"SPWebUrl\",\"IsExternalContent\",\"MediaServiceMetadata\",\"LastModifiedTimeForRetention\"],\"Properties\":[{\"Name\":\"TrimSelectProperties\",\"Value\":{\"StrVal\":\"1\",\"QueryPropertyValueTypeIndex\":1}},{\"Name\":\"EnableDynamicGroups\",\"Value\":{\"BoolVal\":\"True\",\"QueryPropertyValueTypeIndex\":3}},{\"Name\":\"EnableMultiGeoSearch\",\"Value\":{\"BoolVal\":\"False\",\"QueryPropertyValueTypeIndex\":3}}],\"SortList\":[{\"Property\":\"LastModifiedTime\",\"Direction\":1}],\"SourceId\":\"8413CD39-2156-4E00-B54D-11EFD9ABDB89\",\"TrimDuplicates\":false} }";
             var temp_url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/_api/search/postquery";
@@ -44,7 +44,7 @@ namespace SkolplattformenElevApi
             return list;
         }
 
-        public async Task<NewsItem> GetNewsItem(string path)
+        public async Task<NewsItem> GetNewsItemAsync(string path)
         {
             var temp_url = path + "?as=json";
             var request = new HttpRequestMessage
