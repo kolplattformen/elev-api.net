@@ -23,7 +23,6 @@ await api.GetNewsItemAsync(itemList[1].Path);
 
 Console.WriteLine("\n----- Planned Absence -----");
 
-await api.AbsenceSsoLoginAsync();
 var absenceList = await api.GetPlannedAbsenceListAsync();
 foreach (var a in absenceList)
 {
@@ -32,7 +31,6 @@ foreach (var a in absenceList)
 
 Console.WriteLine("\n----- Timetable ------");
 
-await api.TimetableSsoLoginAsync();
 var lessonInfo = await api.GetTimetableAsync(2022, 37);
 
 foreach (var info in lessonInfo)

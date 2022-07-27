@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public async Task AbsenceSsoLoginAsync()
+    private async Task AbsenceSsoLoginAsync()
     {
         var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
         

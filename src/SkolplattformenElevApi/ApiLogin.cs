@@ -238,6 +238,9 @@ namespace SkolplattformenElevApi
 
             _email = email;
 
+            await AbsenceSsoLoginAsync();
+            await TimetableSsoLoginAsync();
+
             // Tests below this line -------------------------------------------------------------------------------------------
 
 
