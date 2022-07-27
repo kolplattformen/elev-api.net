@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SkolplattformenElevApi.Models;
 
 namespace MauiBlazorDemoApp.Data;
 
@@ -21,20 +22,33 @@ public class SkolplattformenService
         _api = new SkolplattformenElevApi.Api();
     }
 
-    public async Task LogIn(string email, string username, string password)
+    public async Task LogInAsync(string email, string username, string password)
     {
-        await _api.LogIn(email, username, password);
+        await _api.LogInAsync(email, username, password);
         _loggedInTime = DateTime.UtcNow;
-        LoggedInName = email;
+        var user = await _api.GetUserAsync();
+        LoggedInName = user?.Name ?? email;
     }
 
     public Task<List<NewsListItem>> GetNewsItemList()
     {
-        return _api.GetNewsItemList();
+        return _api.GetNewsItemListAsync();
     }
 
     public Task<NewsItem> GetNewsItem(string path)
     {
-        return _api.GetNewsItem(path);
+        return _api.GetNewsItemAsync(path);
     }
+
+    public Task<List<Teacher>> GetTeachersAsync()
+    {
+        return _api.GetTeachersAsync();
+    }
+
+    public Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
+    {
+        return _api.GetTimetableAsync(year, week);
+    }
+
+
 }

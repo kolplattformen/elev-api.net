@@ -7,14 +7,14 @@
 
 @if (news == null)
 {
-	<p><em>Loading...</em></p>
+	<Loader></Loader>
 }
 else
 {
 
 	@foreach (var n in news)
 	{
-		<b><a href="/newsitem/@ToBase64(n.Path)"> @n.Title</a></b>
+		<b><a href="/newsitem/@ToBase64(n.Path)"> @n.Title </a></b>
 		<br />
 		@*<span>@n.EditorOwsUser</span><br />*@
 		<span>@n.LastModifiedTime.ToString("yyyy-MM-dd hh:mm")
