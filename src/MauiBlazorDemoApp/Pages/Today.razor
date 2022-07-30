@@ -20,6 +20,11 @@ else
         <span><em>Glöm inte gympapåsen!</em></span>
     }
 
+    @if (@today.Items.Count == 0)
+    {
+        <span><em>Inget att visa idag</em></span>
+    }
+
     foreach (var item in today.Items)
     {
         <p>
@@ -62,8 +67,8 @@ else
         today = new ViewModels.Today
         {
             Items = items.OrderBy(i=>i.StartTime).ToList(),
-                SchoolStartTime = lessons?.OrderBy(l => l.TimeStart).First().TimeStart.Substring(0, 5) ?? "",
-                SchoolEndTime = lessons?.OrderByDescending(l => l.TimeEnd).First().TimeEnd.Substring(0, 5) ?? "",
+                SchoolStartTime = lessons?.OrderBy(l => l.TimeStart).FirstOrDefault()?.TimeStart.Substring(0, 5) ?? "",
+                SchoolEndTime = lessons?.OrderByDescending(l => l.TimeEnd).FirstOrDefault()?.TimeEnd.Substring(0, 5) ?? "",
             Sportsbag = lessons?.Any(l => l.LessonCode == "IDH") ?? false
         };
 
