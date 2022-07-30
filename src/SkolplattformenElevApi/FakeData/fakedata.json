@@ -1,0 +1,94 @@
+{
+  "ApiUser": {
+    "Id": "",
+    "ExeternalId": "",
+    "Name": "",
+    "PrimarySchoolName": "",
+    "PrimarySchoolGuid": "",
+    "Schools": [
+      {
+        "Id": "",
+        "ExteralId": "",
+        "Name": "",
+        "Url": ""
+      }
+    ]
+  },
+  "CalendarItems": [
+    {
+      "Id": "",
+      "Title": "",
+      "Location": "",
+      "Start": "",
+      "End": "",
+      "IsAllDay": "",
+      "Weblink": ""
+    },
+    {
+      "Id": "",
+      "Title": "",
+      "Location": "",
+      "Start": "",
+      "End": "",
+      "IsAllDay": "",
+      "Weblink": ""
+    }
+  ],
+  "PlannedAbsenceItems": [
+    {
+      "Created": "",
+      "AbsenceId": "",
+      "Comment": "",
+      "DateTimeFrom": "",
+      "DateTimeTo": "",
+      "IsFullDayAbsence": false,
+      "ReasonDescription": "",
+      "Reporter": ""
+    },
+    {
+      "Created": "",
+      "AbsenceId": "",
+      "Comment": "",
+      "DateTimeFrom": "",
+      "DateTimeTo": "",
+      "IsFullDayAbsence": false,
+      "ReasonDescription": "",
+      "Reporter": ""
+    }
+  ],
+  "SchoolDetails": [
+    {
+      "Id": "",
+      "ExternalId": "",
+      "Name": "",
+      "Phone": "",
+      "PostalCode": "",
+      "Street": "",
+      "VisitingAddress": "",
+      "Email": "",
+      "PrincipalName": "",
+      "PrincipalPhone": "",
+      "PrincipalEmail": ""
+    }
+  ],
+  "Teachers": [
+    {
+      "Id": "",
+      "Firstname": "",
+      "Lastname": "",
+      "Email": ""
+    }
+  ],
+  "TimeTable": [
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "",
+      "TimeEnd": "",
+      "LessonCode": "",
+      "LessonName": "",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    }
+  ]
+}
