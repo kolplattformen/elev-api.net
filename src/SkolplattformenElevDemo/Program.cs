@@ -8,18 +8,19 @@ Console.WriteLine("Hello, World!");
 var s = await File.ReadAllTextAsync("./elev.json");
 var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 
-var api = new Api();
+var api = new FakeApi();
 await api.LogInAsync(elev.Email, elev.Username, elev.Password);
+
+Console.WriteLine("\n----- News -----");
 
 var itemList = await api.GetNewsItemListAsync(5);
 
-Console.WriteLine("\n----- News -----");
 foreach (var newsListItem in itemList)
 {
     Console.WriteLine($"{newsListItem.Title} | {newsListItem.ModifiedBy} | {newsListItem.Path}");
 }
 
-await api.GetNewsItemAsync(itemList[1].Path);
+//await api.GetNewsItemAsync(itemList[1].Path);
 
 Console.WriteLine("\n----- Planned Absence -----");
 

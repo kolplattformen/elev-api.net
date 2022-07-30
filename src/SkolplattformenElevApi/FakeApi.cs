@@ -1,53 +1,76 @@
 ﻿using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.News;
+using System.Reflection;
+using System.Text.Json;
 
 namespace SkolplattformenElevApi
 {
     public class FakeApi: IApi
     {
+        private FakeData.FakeData _fakeData;
+
+        public FakeApi()
+        {
+
+            var assembly = Assembly.GetExecutingAssembly();
+
+            var resourceName = assembly.GetManifestResourceNames()
+                .Single(str => str.EndsWith("fakedata.json"));
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName)!)
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+
+                _fakeData = JsonSerializer.Deserialize<FakeData.FakeData>(result)!;
+            }
+
+       
+        }
+
         public async Task LogInAsync(string email, string username, string password)
         {
-            throw new NotImplementedException();
+            await Task.Delay(1000);
         }
 
-        public async Task<List<NewsListItem>> GetNewsItemListAsync(int itemsToGet = 5)
+        public Task<List<NewsListItem>> GetNewsItemListAsync(int itemsToGet = 5)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<NewsListItem>());
         }
 
-        public async Task<NewsItem> GetNewsItemAsync(string path)
+        public Task<NewsItem> GetNewsItemAsync(string path)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new NewsItem());
         }
 
-        public async Task<ApiUser?> GetUserAsync()
+        public Task<ApiUser?> GetUserAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.ApiUser);
         }
 
-        public async Task<List<Teacher>> GetTeachersAsync()
+        public Task<List<Teacher>> GetTeachersAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.Teachers);
         }
 
-        public async Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId)
+        public Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.SchoolDetails.FirstOrDefault());
         }
 
-        public async Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
+        public Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.TimeTable);
         }
 
-        public async Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
+        public Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.CalendarItems);
         }
 
-        public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
+        public Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_fakeData.PlannedAbsenceItems);
         }
     }
 }

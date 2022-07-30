@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="FakeData\fakedata.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Remove="FakeData\fakedata.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="FakeData\fakedata.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

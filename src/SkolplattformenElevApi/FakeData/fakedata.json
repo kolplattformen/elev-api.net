@@ -1,69 +1,27 @@
 {
   "ApiUser": {
-    "Id": "",
-    "ExeternalId": "",
-    "Name": "",
-    "PrimarySchoolName": "",
-    "PrimarySchoolGuid": "",
+    "Id": "76244D5A-23E8-43E5-924A-8BDD4E0C6F3B",
+    "ExeternalId": "F3089B25-6C7A-49D5-A3C2-5A35235BAC21",
+    "Name": "Alan Nilsson",
+    "PrimarySchoolName": "Superskolan",
+    "PrimarySchoolGuid": "A652E3DD-B5E6-4F34-9CB3-0EF42DE3C831",
     "Schools": [
       {
-        "Id": "",
-        "ExteralId": "",
-        "Name": "",
-        "Url": ""
+        "Id": "01C7757F-AF56-4BD5-9006-FDA5105D7381",
+        "ExteralId": "A652E3DD-B5E6-4F34-9CB3-0EF42DE3C831",
+        "Name": "Superskolan",
+        "Url": "https://elevstockholm.sharepoint.com/sites/superskolan"
       }
     ]
   },
-  "CalendarItems": [
-    {
-      "Id": "",
-      "Title": "",
-      "Location": "",
-      "Start": "",
-      "End": "",
-      "IsAllDay": "",
-      "Weblink": ""
-    },
-    {
-      "Id": "",
-      "Title": "",
-      "Location": "",
-      "Start": "",
-      "End": "",
-      "IsAllDay": "",
-      "Weblink": ""
-    }
-  ],
-  "PlannedAbsenceItems": [
-    {
-      "Created": "",
-      "AbsenceId": "",
-      "Comment": "",
-      "DateTimeFrom": "",
-      "DateTimeTo": "",
-      "IsFullDayAbsence": false,
-      "ReasonDescription": "",
-      "Reporter": ""
-    },
-    {
-      "Created": "",
-      "AbsenceId": "",
-      "Comment": "",
-      "DateTimeFrom": "",
-      "DateTimeTo": "",
-      "IsFullDayAbsence": false,
-      "ReasonDescription": "",
-      "Reporter": ""
-    }
-  ],
   "SchoolDetails": [
     {
-      "Id": "",
-      "ExternalId": "",
-      "Name": "",
-      "Phone": "",
-      "PostalCode": "",
-      "Street": "",
+      "Id": "01C7757F-AF56-4BD5-9006-FDA5105D7381",
+      "ExternalId": "A652E3DD-B5E6-4F34-9CB3-0EF42DE3C831",
+      "Name": "Superskolan",
+      "Phone": "08",
+      "PostalCode": "123 88",
+      "Street": "Supervägen",
       "VisitingAddress": "",
       "Email": "",
       "PrincipalName": "",
@@ -71,24 +29,57 @@
       "PrincipalEmail": ""
     }
   ],
+  "CalendarItems": [
+    {
+      "Id": "abc",
+      "Title": "Tandläkare",
+      "Location": "",
+      "Start": "2001-01-01T00:00:00+00",
+      "End": "2001-01-01T00:00:00+00",
+      "IsAllDay": false,
+      "Weblink": ""
+    },
+    {
+      "Id": "def",
+      "Title": "Matteläxa",
+      "Location": "",
+      "Start": "2001-01-01T00:00:00+00",
+      "End": "2001-01-01T00:00:00+00",
+      "IsAllDay": false,
+      "Weblink": ""
+    }
+  ],
+  "PlannedAbsenceItems": [
+    {
+      "Created": "2001-01-01T00:00:00+00",
+      "AbsenceId": "abc",
+      "Comment": "",
+      "DateTimeFrom": "2001-01-01T00:00:00+00",
+      "DateTimeTo": "2001-01-01T00:00:00+00",
+      "IsFullDayAbsence": false,
+      "ReasonDescription": "Frånvaroanmäld av vårdnadshavare",
+      "Reporter": "Belinda Nilsson"
+    }
+  ],
+
   "Teachers": [
     {
-      "Id": "",
-      "Firstname": "",
-      "Lastname": "",
-      "Email": ""
+      "Id": 56,
+      "Firstname": "Alan",
+      "Lastname": "Turing",
+      "Email": "alan.turing@edu.stockholm.se"
     }
   ],
   "TimeTable": [
     {
       "DayOfWeekNumber": 1,
-      "TimeStart": "",
-      "TimeEnd": "",
-      "LessonCode": "",
-      "LessonName": "",
-      "TeacherCode": "",
-      "TeacherName": "",
-      "Location": ""
+      "TimeStart": "08:10",
+      "TimeEnd": "08:39",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": "Sal 12"
     }
   ]
 }
