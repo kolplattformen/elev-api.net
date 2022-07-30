@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace SkolplattformenElevApi;
 
-public partial class Api
+public partial class Api:IApi
 {
     private readonly CookieContainer _cookieContainer;
     private readonly HttpClient _httpClient;

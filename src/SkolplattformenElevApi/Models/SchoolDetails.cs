@@ -14,5 +14,5 @@ public class SchoolDetails
     public string Email { get; set; } = string.Empty;
     public string PrincipalName { get; set; } = string.Empty;
     public string PrincipalPhone { get; set; } = string.Empty;
-    public string PrincipalEmail { get; set; }  
+    public string PrincipalEmail { get; set; } = string.Empty;
 }
