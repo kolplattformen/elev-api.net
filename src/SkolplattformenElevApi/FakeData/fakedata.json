@@ -57,7 +57,7 @@
       "DateTimeFrom": "2001-01-01T00:00:00+00",
       "DateTimeTo": "2001-01-01T00:00:00+00",
       "IsFullDayAbsence": false,
-      "ReasonDescription": "Frånvaroanmäld av vårdnadshavare",
+      "ReasonDescription": "Frånvaroanmäld via SMS",
       "Reporter": "Belinda Nilsson"
     }
   ],
@@ -68,18 +68,444 @@
       "Firstname": "Alan",
       "Lastname": "Turing",
       "Email": "alan.turing@edu.stockholm.se"
+    },
+    {
+      "Id": 65,
+      "Firstname": "Marie",
+      "Lastname": "Curie",
+      "Email": "marie.curieg@edu.stockholm.se"
+    },
+    {
+      "Id": 75,
+      "Firstname": "Astrid",
+      "Lastname": "Lindgren",
+      "Email": "astrid.lindgren@edu.stockholm.se"
+    },
+    {
+      "Id": 77,
+      "Firstname": "Yuval Noah",
+      "Lastname": "Harari",
+      "Email": "yuval.noah.harari@edu.stockholm.se"
+    },
+    {
+      "Id": 475,
+      "Firstname": "Usain",
+      "Lastname": "Bolt",
+      "Email": "usain.bolt@edu.stockholm.se"
+    },
+    {
+      "Id": 765,
+      "Firstname": "Anders",
+      "Lastname": "Zorn",
+      "Email": "anders.zorn@edu.stockholm.se"
+    },
+    {
+      "Id": 754,
+      "Firstname": "Carl Michael",
+      "Lastname": "Bellman",
+      "Email": "carl.michael.bellman@edu.stockholm.se"
     }
   ],
   "TimeTable": [
     {
       "DayOfWeekNumber": 1,
-      "TimeStart": "08:10",
-      "TimeEnd": "08:39",
+      "TimeStart": "11:50:00",
+      "TimeEnd": "12:10:00",
+      "LessonCode": "LUNCH",
+      "LessonName": "LUNCH",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "12:45:00",
+      "TimeEnd": "13:15:00",
+      "LessonCode": "M-tid",
+      "LessonName": "M-tid",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "08:15:00",
+      "TimeEnd": "09:35:00",
+      "LessonCode": "MA",
+      "LessonName": "MA",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "09:35:00",
+      "TimeEnd": "09:55:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "10:30:00",
+      "TimeEnd": "11:15:00",
+      "LessonCode": "NO",
+      "LessonName": "NO",
+      "TeacherCode": "MCU",
+      "TeacherName": "MCU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "11:15:00",
+      "TimeEnd": "11:50:00",
+      "LessonCode": "TK",
+      "LessonName": "TK",
+      "TeacherCode": "MCU",
+      "TeacherName": "MCU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "09:55:00",
+      "TimeEnd": "10:30:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 1,
+      "TimeStart": "12:10:00",
+      "TimeEnd": "12:45:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "09:55:00",
+      "TimeEnd": "10:50:00",
+      "LessonCode": "SO",
+      "LessonName": "SO",
+      "TeacherCode": "YHA",
+      "TeacherName": "YHA",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "10:50:00",
+      "TimeEnd": "11:50:00",
+      "LessonCode": "NO",
+      "LessonName": "NO",
+      "TeacherCode": "MCU",
+      "TeacherName": "MCU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "14:10:00",
+      "TimeEnd": "15:00:00",
+      "LessonCode": "IDH",
+      "LessonName": "IDH",
+      "TeacherCode": "UBO",
+      "TeacherName": "UBO",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "12:45:00",
+      "TimeEnd": "13:45:00",
+      "LessonCode": "EN",
+      "LessonName": "EN",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "11:50:00",
+      "TimeEnd": "12:10:00",
+      "LessonCode": "LUNCH",
+      "LessonName": "LUNCH",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "08:55:00",
+      "TimeEnd": "09:35:00",
+      "LessonCode": "EV",
+      "LessonName": "EV",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "13:45:00",
+      "TimeEnd": "14:00:00",
       "LessonCode": "SV",
       "LessonName": "SV",
       "TeacherCode": "ATU",
       "TeacherName": "ATU",
-      "Location": "Sal 12"
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "09:35:00",
+      "TimeEnd": "09:55:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "08:15:00",
+      "TimeEnd": "08:55:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 2,
+      "TimeStart": "12:10:00",
+      "TimeEnd": "12:45:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "09:55:00",
+      "TimeEnd": "10:40:00",
+      "LessonCode": "MA",
+      "LessonName": "MA",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "12:00:00",
+      "TimeEnd": "12:45:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "11:40:00",
+      "TimeEnd": "12:00:00",
+      "LessonCode": "LUNCH",
+      "LessonName": "LUNCH",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "12:45:00",
+      "TimeEnd": "14:05:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "08:30:00",
+      "TimeEnd": "09:35:00",
+      "LessonCode": "SO",
+      "LessonName": "SO",
+      "TeacherCode": "YHA",
+      "TeacherName": "YHA",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "10:45:00",
+      "TimeEnd": "11:35:00",
+      "LessonCode": "BL",
+      "LessonName": "BL",
+      "TeacherCode": "AZO",
+      "TeacherName": "AZO",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 3,
+      "TimeStart": "09:35:00",
+      "TimeEnd": "09:55:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "11:10:00",
+      "TimeEnd": "11:45:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "10:20:00",
+      "TimeEnd": "11:10:00",
+      "LessonCode": "MA",
+      "LessonName": "MA",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "12:45:00",
+      "TimeEnd": "13:10:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "09:20:00",
+      "TimeEnd": "10:20:00",
+      "LessonCode": "EN",
+      "LessonName": "EN",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "14:35:00",
+      "TimeEnd": "15:00:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": "C123"
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "11:45:00",
+      "TimeEnd": "12:05:00",
+      "LessonCode": "LUNCH",
+      "LessonName": "LUNCH",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "13:20:00",
+      "TimeEnd": "14:10:00",
+      "LessonCode": "IDH",
+      "LessonName": "IDH",
+      "TeacherCode": "UBO",
+      "TeacherName": "UBO",
+      "Location": "Gymnastiksalen"
+    },
+    {
+      "DayOfWeekNumber": 4,
+      "TimeStart": "12:05:00",
+      "TimeEnd": "12:45:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "09:35:00",
+      "TimeEnd": "09:55:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "11:00:00",
+      "TimeEnd": "11:40:00",
+      "LessonCode": "MU",
+      "LessonName": "MU",
+      "TeacherCode": "CBE",
+      "TeacherName": "CBE",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "11:45:00",
+      "TimeEnd": "12:05:00",
+      "LessonCode": "LUNCH",
+      "LessonName": "LUNCH",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "08:15:00",
+      "TimeEnd": "09:35:00",
+      "LessonCode": "SO",
+      "LessonName": "SO",
+      "TeacherCode": "YHA",
+      "TeacherName": "YHA",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "12:05:00",
+      "TimeEnd": "12:45:00",
+      "LessonCode": "RAST",
+      "LessonName": "RAST",
+      "TeacherCode": "",
+      "TeacherName": "",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "09:55:00",
+      "TimeEnd": "10:55:00",
+      "LessonCode": "MA",
+      "LessonName": "MA",
+      "TeacherCode": "ATU",
+      "TeacherName": "ATU",
+      "Location": ""
+    },
+    {
+      "DayOfWeekNumber": 5,
+      "TimeStart": "12:45:00",
+      "TimeEnd": "13:55:00",
+      "LessonCode": "SV",
+      "LessonName": "SV",
+      "TeacherCode": "ALI",
+      "TeacherName": "ALI",
+      "Location": ""
     }
   ]
 }
