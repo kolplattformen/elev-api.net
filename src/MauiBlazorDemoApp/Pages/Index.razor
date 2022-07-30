@@ -8,16 +8,27 @@
 @if(SkolplattformenService.IsLoggedIn)
 {
     <span>Välkommen @SkolplattformenService.LoggedInName</span>
+
+
+    <button class="btn btn-primary" @onclick="LogoutButtonPressed">Logga ut</button>
 }
 else
 {
     <p>Logga in</p>
+    <div class="form-group mb-3">
+        <input class="form-control mb-2" type="text" @bind=@email placeholder="email">
+        <input class="form-control mb-2" type="text" @bind=@username placeholder="användarnamn">
+        <input class="form-control mb-2" type="password" @bind=@password placeholder="lösenord">
 
-    <input  type="text" @bind=@email placeholder="email">
-     <input type="text" @bind=@username placeholder="användarnamn">
-    <input type="password" @bind=@password placeholder="lösenord">
+        <button class="btn btn-primary" @onclick="LoginButtonPressed">Logga in</button>
+    </div>
 
-    <button class="btn btn-primary" @onclick="LoginButtonPressed">Logga in</button>
+    <div class="form-group">
+        <select class="form-control" @bind=@System>
+            <option value="1">Skolplattformen</option>
+            <option value="2">Demo</option>
+        </select>
+    </div>
 
 }
 
@@ -31,8 +42,44 @@ else
     private string username = "";
     private string password = "";
 
+    private string system;
+
+    private string System
+    {
+        get => system;
+        set { system = value;
+            ChangeApi();
+        }
+    }
+
+  
+    private void ChangeApi()
+    {
+        ApiKind kind;
+        switch (system)
+        {
+            case "1":
+                kind = ApiKind.Skolplattformen;
+                break;
+            case "2":
+                kind = ApiKind.FakeData;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(kind));
+        }
+
+        SkolplattformenService.SelectApi(kind);
+    }
+
     private async Task LoginButtonPressed()
     {
         await SkolplattformenService.LogInAsync(email, username, password);
+        StateHasChanged();
+    }
+
+    private void LogoutButtonPressed()
+    {
+        SkolplattformenService.LogOut();
+        StateHasChanged();
     }
 }

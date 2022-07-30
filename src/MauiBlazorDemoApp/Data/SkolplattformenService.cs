@@ -9,17 +9,45 @@ using SkolplattformenElevApi.Models;
 
 namespace MauiBlazorDemoApp.Data;
 
+public enum ApiKind
+{
+    Skolplattformen = 1,
+    FakeData = 2
+}
+
 public class SkolplattformenService
 {
-    private readonly Api _api;
+    private IApi _api;
     private DateTime _loggedInTime = DateTime.MinValue;
     public string LoggedInName { get; set; } = string.Empty;
     public bool IsLoggedIn =>  _loggedInTime > DateTime.UtcNow.AddMinutes(-29);
+    private ApiKind _apiKind = ApiKind.Skolplattformen;
     
 
     public  SkolplattformenService()
     {
         _api = new SkolplattformenElevApi.Api();
+        
+    }
+
+    public void SelectApi(ApiKind apiKind)
+    {
+        _apiKind = apiKind;
+
+        LogOut();
+    }
+
+    public void LogOut()
+    {
+        _loggedInTime = DateTime.MinValue;
+        if (_apiKind == ApiKind.Skolplattformen)
+        {
+            _api = new Api();
+        }
+        else
+        {
+            _api = new FakeApi();
+        }
     }
 
     public async Task LogInAsync(string email, string username, string password)
@@ -49,6 +77,5 @@ public class SkolplattformenService
     {
         return _api.GetTimetableAsync(year, week);
     }
-
-
+   
 }

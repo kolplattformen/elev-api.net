@@ -42,7 +42,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         var items = new List<ViewModels.TodayItem>();
-        var now = DateTime.Now;
+        var now = DateTime.Now.AddDays(-2);
         
         // Get lessons
         var dayOfWeek = (int)now.DayOfWeek;
