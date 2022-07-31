@@ -73,9 +73,15 @@ public class SkolplattformenService
         return _api.GetTeachersAsync();
     }
 
-    public Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
+    public async Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
     {
-        return _api.GetTimetableAsync(year, week);
+
+        var teachers = await _api.GetTeachersAsync();
+        var lessons = await _api.GetTimetableAsync(year, week);
+        _api.EnrichTimetableWithCurriculum(lessons);
+        _api.EnrichTimetableWithTeachers(lessons, teachers);
+
+        return lessons;
     }
    
 }

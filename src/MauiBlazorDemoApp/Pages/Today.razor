@@ -54,7 +54,7 @@ else
             {
                 StartTime = lesson.TimeStart.Substring(0,5),
                 EndTime = lesson.TimeEnd.Substring(0, 5),
-                Title = lesson.LessonName,
+                Title = lesson.SubjectName,
                 Description = $"{lesson.TeacherName} {lesson.Location}"
             });
         }
@@ -69,7 +69,7 @@ else
             Items = items.OrderBy(i=>i.StartTime).ToList(),
                 SchoolStartTime = lessons?.OrderBy(l => l.TimeStart).FirstOrDefault()?.TimeStart.Substring(0, 5) ?? "",
                 SchoolEndTime = lessons?.OrderByDescending(l => l.TimeEnd).FirstOrDefault()?.TimeEnd.Substring(0, 5) ?? "",
-            Sportsbag = lessons?.Any(l => l.LessonCode == "IDH") ?? false
+            Sportsbag = lessons?.Any(l => l.SubjectCode == "IDH") ?? false
         };
 
     }
