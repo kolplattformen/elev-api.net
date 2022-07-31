@@ -159,8 +159,8 @@ public partial class Api
                 DayOfWeekNumber = item.DayOfWeekNumber,
                 TimeStart = item.TimeStart,
                 TimeEnd = item.TimeEnd,
-                LessonCode = item.Texts[0],
-                LessonName = item.Texts[0],
+                SubjectCode = item.Texts[0],
+                SubjectName = item.Texts[0],
                 TeacherCode = item.Texts[1],
                 TeacherName = item.Texts[1],
                 Location = item.Texts[2]

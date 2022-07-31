@@ -65,7 +65,7 @@ api.EnrichTimetableWithCurriculum(lessonInfo);
 
 foreach (var info in lessonInfo)
 {
-    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.LessonName} {info.TeacherName} {info.Location} ");
+    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.SubjectName} {info.TeacherName} {info.Location} ");
 }
 
 

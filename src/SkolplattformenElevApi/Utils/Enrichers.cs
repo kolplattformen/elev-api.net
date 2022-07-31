@@ -15,10 +15,10 @@ internal static class Enrichers
 
         foreach (var l in timetable)
         {
-            var subject = curriculum.GetSubject(l.LessonCode);
+            var subject = curriculum.GetSubject(l.SubjectCode);
             if (subject != null)
             {
-                l.LessonName = subject.Name;
+                l.SubjectName = subject.Name;
             }
 
         }
