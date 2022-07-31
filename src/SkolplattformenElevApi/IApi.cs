@@ -14,5 +14,6 @@ namespace SkolplattformenElevApi
         Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week);
         Task<List<CalendarItem>> GetCalendarAsync(DateOnly date);
         Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync();
+        void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers);
     }
 }

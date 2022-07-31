@@ -30,15 +30,6 @@ foreach (var a in absenceList)
     Console.WriteLine($"{a.DateTimeFrom.Date} {a.ReasonDescription} ({a.Reporter})");
 }
 
-Console.WriteLine("\n----- Timetable ------");
-
-var lessonInfo = await api.GetTimetableAsync(2022, 37);
-
-foreach (var info in lessonInfo)
-{
-    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.LessonName} {info.TeacherName} {info.Location} ");
-}
-
 
 Console.WriteLine("\n----- Calendar ------");
 
@@ -65,6 +56,16 @@ foreach (var teacher in teachers)
     Console.WriteLine($"{teacher.Firstname} {teacher.Lastname} {teacher.Email}");
 }
 
+Console.WriteLine("\n----- Timetable ------");
+
+var lessonInfo = await api.GetTimetableAsync(2022, 37);
+
+api.EnrichTimetableWithTeachers(lessonInfo, teachers);
+
+foreach (var info in lessonInfo)
+{
+    Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.LessonName} {info.TeacherName} {info.Location} ");
+}
 
 
 
