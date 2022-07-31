@@ -26,6 +26,7 @@ internal class Curriculum
 
     public Subject? GetSubject(string subjectCode)
     {
+        if (string.IsNullOrEmpty(subjectCode)) return null;
 
         var codeParts = subjectCode.Split(' ');
         var code = codeParts[0];
