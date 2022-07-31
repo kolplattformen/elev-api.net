@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Curriculum\sv.json" />
     <None Remove="FakeData\fakedata.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Curriculum\sv.json" />
     <EmbeddedResource Include="FakeData\fakedata.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties fakedata_4fakedata_1json__JsonSchema="fake API" /></VisualStudio></ProjectExtensions>
 
 </Project>

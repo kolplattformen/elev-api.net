@@ -9,8 +9,9 @@ public partial class Api
 {
     private async Task TimetableSsoLoginAsync()
     {
-        var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=TimetableViewer";
-        
+        var temp_url =
+            "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=TimetableViewer";
+
         var temp_res = await _httpClient.GetAsync(temp_url);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
 
@@ -39,7 +40,7 @@ public partial class Api
         }
     }
 
-    private async Task<(string,string)> GetTimetableUnitGuidAndPersonGuid()
+    private async Task<(string, string)> GetTimetableUnitGuidAndPersonGuid()
     {
         var temp_url = "https://fns.stockholm.se/ng/api/services/skola24/get/personal/timetables";
 
@@ -52,7 +53,7 @@ public partial class Api
             {
                 { "Referer", "https://fns.stockholm.se/ng/timetable/timetable-viewer" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
-                { "Accept", "application/json"},
+                { "Accept", "application/json" },
                 { "Origin", "https://fns.stockholm.se" },
             },
             Content = new StringContent(content)
@@ -88,7 +89,7 @@ public partial class Api
             {
                 { "Referer", "https://fns.stockholm.se/ng/timetable/timetable-viewer/fns.stockholm.se/" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
-                { "Accept", "application/json"},
+                { "Accept", "application/json" },
                 { "Origin", "https://fns.stockholm.se" },
             },
         };
@@ -102,7 +103,7 @@ public partial class Api
         };
         var obj = JsonSerializer.Deserialize<TimetableRenderKeyResponse>(temp_content, jsonSerializerOptions);
         var key = obj.Data.Key;
-        
+
         return key;
     }
 
@@ -111,7 +112,10 @@ public partial class Api
         var (unitGuid, personGuid) = await GetTimetableUnitGuidAndPersonGuid();
         var key = await GetTimetableRenderKey();
 
-        var content = "{\"renderKey\":\"" + key +  "\",\"host\":\"fns.stockholm.se\",\"unitGuid\":\"" + unitGuid + "\",\"startDate\":null,\"endDate\":null,\"scheduleDay\":0,\"blackAndWhite\":false,\"width\":1227,\"height\":1191,\"selectionType\":5,\"selection\":\"" + personGuid + "\",\"showHeader\":false,\"periodText\":\"\",\"week\":" + week + ",\"year\":" + year + ",\"privateFreeTextMode\":null,\"privateSelectionMode\":true,\"customerKey\":\"\"}";
+        var content = "{\"renderKey\":\"" + key + "\",\"host\":\"fns.stockholm.se\",\"unitGuid\":\"" + unitGuid +
+                      "\",\"startDate\":null,\"endDate\":null,\"scheduleDay\":0,\"blackAndWhite\":false,\"width\":1227,\"height\":1191,\"selectionType\":5,\"selection\":\"" +
+                      personGuid + "\",\"showHeader\":false,\"periodText\":\"\",\"week\":" + week + ",\"year\":" +
+                      year + ",\"privateFreeTextMode\":null,\"privateSelectionMode\":true,\"customerKey\":\"\"}";
 
         var temp_url = "https://fns.stockholm.se/ng/api/render/timetable";
 
@@ -123,7 +127,7 @@ public partial class Api
             {
                 { "Referer", "https://fns.stockholm.se/ng/timetable/timetable-viewer/fns.stockholm.se/" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
-                { "Accept", "application/json"},
+                { "Accept", "application/json" },
                 { "Origin", "https://fns.stockholm.se" },
             },
             Content = new StringContent(content)
@@ -139,7 +143,8 @@ public partial class Api
             PropertyNameCaseInsensitive = true
         };
 
-        var authorizeResponse = JsonSerializer.Deserialize<TimetableRenderResponse>(temp_content, jsonSerializerOptions);
+        var authorizeResponse =
+            JsonSerializer.Deserialize<TimetableRenderResponse>(temp_content, jsonSerializerOptions);
 
         if (authorizeResponse?.Data?.LessonInfo == null)
         {
@@ -154,8 +159,8 @@ public partial class Api
                 DayOfWeekNumber = item.DayOfWeekNumber,
                 TimeStart = item.TimeStart,
                 TimeEnd = item.TimeEnd,
-                LessonCode = item.Texts[0],
-                LessonName = item.Texts[0],
+                SubjectCode = item.Texts[0],
+                SubjectName = item.Texts[0],
                 TeacherCode = item.Texts[1],
                 TeacherName = item.Texts[1],
                 Location = item.Texts[2]
@@ -164,5 +169,14 @@ public partial class Api
 
         return lessonList;
     }
-}
 
+    public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
+    {
+        Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);
+    }
+
+    public void EnrichTimetableWithCurriculum(List<TimeTableLesson> timetable)
+    {
+        Utils.Enrichers.EnrichTimetableWithCurriculum(timetable);
+    }
+}
