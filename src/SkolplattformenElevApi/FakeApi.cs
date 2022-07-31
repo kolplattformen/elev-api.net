@@ -72,5 +72,15 @@ namespace SkolplattformenElevApi
         {
             return Task.FromResult(_fakeData.PlannedAbsenceItems);
         }
+
+        public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
+        {
+            Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);
+        }
+
+        public void EnrichTimetableWithCurriculum(List<TimeTableLesson> timetable)
+        {
+           Utils.Enrichers.EnrichTimetableWithCurriculum(timetable);
+        }
     }
 }

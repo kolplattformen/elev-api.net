@@ -16,6 +16,7 @@ Some parts are working. Code is still a mess. Ongoing guesswork....
 * Getting user info
 * Getting school info
 * Getting list och teachers
+* Enrich timetable with curriculum and teachers' names to get a human readable output
 
 ## Contribute / Try
 ### Prerequisites
