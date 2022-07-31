@@ -178,5 +178,17 @@ public partial class Api
             }
         }
     }
+
+    public void EnrichTimetableWithCurriculum(List<TimeTableLesson> timetable, List<Teacher> teachers)
+    {
+        var curriculm = new Curriculum.Curriculum();
+
+        foreach (var l in timetable)
+        {
+            var a = curriculm.GetSubject(l.LessonCode);
+
+        }
+        }
+    }
 }
 
