@@ -18,4 +18,6 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties fakedata_4fakedata_1json__JsonSchema="fake API" /></VisualStudio></ProjectExtensions>
+
 </Project>

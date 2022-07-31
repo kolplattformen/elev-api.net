@@ -61,6 +61,7 @@ Console.WriteLine("\n----- Timetable ------");
 var lessonInfo = await api.GetTimetableAsync(2022, 37);
 
 api.EnrichTimetableWithTeachers(lessonInfo, teachers);
+api.EnrichTimetableWithCurriculum(lessonInfo);
 
 foreach (var info in lessonInfo)
 {

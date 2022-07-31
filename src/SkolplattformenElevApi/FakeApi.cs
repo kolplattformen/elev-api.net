@@ -75,16 +75,12 @@ namespace SkolplattformenElevApi
 
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
         {
-            foreach (var l in timetable)
-            {
-                var teacher = teachers.FirstOrDefault(t =>
-                    $"{t.Firstname.Substring(0, 1).ToUpper()}{t.Lastname.Substring(0, 2).ToUpper()}" == l.TeacherCode);
+            Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);
+        }
 
-                if (teacher != null)
-                {
-                    l.TeacherName = $"{teacher.Firstname} {teacher.Lastname}";
-                }
-            }
+        public void EnrichTimetableWithCurriculum(List<TimeTableLesson> timetable)
+        {
+           Utils.Enrichers.EnrichTimetableWithCurriculum(timetable);
         }
     }
 }
