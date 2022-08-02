@@ -115,6 +115,11 @@ public partial class Api
         return teacherList;
     }
 
+    public void EnrichTeachersWithSubjects(List<Teacher> teachers, List<TimeTableLesson> timetable)
+    {
+        Utils.Enrichers.EnrichTeachersWithSubjects(teachers, timetable);
+    }
+
     public async Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId)
     {
 
