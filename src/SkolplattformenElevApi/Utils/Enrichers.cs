@@ -37,6 +37,26 @@ internal static class Enrichers
             }
         }
     }
+
+    internal static void EnrichTeachersWithSubjects(List<Teacher> teachers, List<TimeTableLesson> timetable)
+    {
+        foreach (var t in teachers)
+        {
+
+            var subjects = timetable.Where(tt =>
+                tt.TeacherCode == $"{t.Firstname.Substring(0, 1).ToUpper()}{t.Lastname.Substring(0, 2).ToUpper()}");
+
+            foreach (var s in subjects)
+            {
+                if (!t.Subjects.Contains(s.SubjectName))
+                {
+                    t.Subjects.Add(s.SubjectName);
+                }
+            }
+
+            
+        }
+    }
 }
    
     

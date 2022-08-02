@@ -82,5 +82,10 @@ namespace SkolplattformenElevApi
         {
            Utils.Enrichers.EnrichTimetableWithCurriculum(timetable);
         }
+
+        public void EnrichTeachersWithSubjects(List<Teacher> teachers, List<TimeTableLesson> timetable)
+        {
+            Utils.Enrichers.EnrichTeachersWithSubjects(teachers, timetable);
+        }
     }
 }
