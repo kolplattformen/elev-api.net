@@ -106,6 +106,36 @@
       "Email": "carl.michael.bellman@edu.stockholm.se"
     }
   ],
+  "Meals": [
+    {
+      "Date": "2001-01-01T00:00:00+00",
+      "Title": "Måndag - Vecka 34",
+      "Description": "Blomkålscurry med linser, mango chutney och ris\nÖrt- och parmesangratinerad fiskfilé med råhyvlad fänkål och kokt potatis"
+    },
+    {
+      "Date": "2001-01-01T00:00:00+00",
+      "Title": "Tisdag - Vecka 34",
+      "Description": "Rotsakspytt i panna med grilling cheese, svamp och rödbetshummus\nKöttfärslimpa med färskost och tomat, skysås och rostad potatis"
+    },
+    {
+      "Date": "2001-01-01T00:00:00+00",
+      "Title": "Onsdag - Vecka 34",
+      "Description": "Kikärtsbiffar med rökt paprikamajonnäs och ris\nKycklinggryta New Orleans – selleri, paprika, chili och dirty rice"
+    },
+    {
+      "Date": "2001-01-01T00:00:00+00",
+      "Title": "Torsdag - Vecka 34",
+      "Description": "Vegetarisk schnitzel med ljummen potatissallad med spenat, solrosfrön och rödlök, färskostcrème med basilika\nBlodpudding med stekt bacon, lök och färsk kål"
+    },
+    {
+      "Date": "2001-01-01T00:00:00+00",
+      "Title": "Fredag - Vecka 34",
+      "Description": "Pastagratäng med paprika och mozzarellaost\nMustig fiskgryta med aioli och kokt potatis"
+    }
+
+
+
+  ], 
   "TimeTable": [
     {
       "DayOfWeekNumber": 1,

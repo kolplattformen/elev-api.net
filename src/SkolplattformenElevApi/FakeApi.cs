@@ -1,4 +1,6 @@
-﻿using SkolplattformenElevApi.Models;
+﻿using System.Globalization;
+using Microsoft.VisualBasic;
+using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.News;
 using System.Reflection;
 using System.Text.Json;
@@ -25,7 +27,50 @@ namespace SkolplattformenElevApi
                 _fakeData = JsonSerializer.Deserialize<FakeData.FakeData>(result)!;
             }
 
-       
+            AdjustCalenderDates();
+            AdjustMealDates();
+            AdjustPlannedAbsenceDates();
+
+        }
+
+        private void AdjustCalenderDates()
+        {
+            var today = DateTime.Today;
+            var firstDayOdWeek = today.AddDays(-1 * (int)today.DayOfWeek);
+            var daysSince = (today - new DateTime(2001, 01, 01)).TotalDays;
+            _fakeData.CalendarItems[0].Start = firstDayOdWeek.AddDays(1).AddHours(14);
+            _fakeData.CalendarItems[0].End = firstDayOdWeek.AddDays(1).AddHours(14).AddMinutes(30);
+
+            _fakeData.CalendarItems[1].Start = firstDayOdWeek.AddDays(5).AddHours(10);
+            _fakeData.CalendarItems[1].End = firstDayOdWeek.AddDays(5).AddHours(11).AddMinutes(30);
+        }
+
+        private void AdjustMealDates()
+        {
+            var today = DateTime.Today;
+            var firstDayOdWeek = today.AddDays(-1 * (int)today.DayOfWeek);
+            var isoWeek = ISOWeek.GetWeekOfYear(today);
+            var startDate = firstDayOdWeek.AddDays(+1).AddHours(12);
+            foreach (var meal in _fakeData.Meals)
+            {
+                var parts = meal.Title.Split(" ");
+                parts[^1] = isoWeek.ToString();
+
+                meal.Title = string.Join(" ", parts);
+                meal.Date = startDate;
+                startDate = startDate.AddDays(1);
+                
+            }
+        }
+
+        private void AdjustPlannedAbsenceDates()
+        {
+            var today = DateTime.Today;
+            var firstDayOdWeek = today.AddDays(-1 * (int)today.DayOfWeek);
+            _fakeData.PlannedAbsenceItems[0].Created = firstDayOdWeek.AddDays(2).AddHours(8);
+            _fakeData.PlannedAbsenceItems[0].DateTimeFrom = firstDayOdWeek.AddDays(2).AddHours(9);
+            _fakeData.PlannedAbsenceItems[0].DateTimeTo = firstDayOdWeek.AddDays(2).AddHours(19);
+            _fakeData.PlannedAbsenceItems[0].IsFullDayAbsence = true;
         }
 
         public async Task LogInAsync(string email, string username, string password)
@@ -71,6 +116,11 @@ namespace SkolplattformenElevApi
         public Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
         {
             return Task.FromResult(_fakeData.PlannedAbsenceItems);
+        }
+
+        public Task<List<Meal>> GetMeals(int year, int week)
+        {
+            return Task.FromResult(_fakeData.Meals);
         }
 
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)

@@ -68,6 +68,13 @@ foreach (var info in lessonInfo)
     Console.WriteLine($"{info.DayOfWeekNumber} {info.TimeStart}-{info.TimeEnd}: {info.SubjectName} {info.TeacherName} {info.Location} ");
 }
 
+Console.WriteLine("\n------- Meals ---------");
+var meals = await api.GetMeals(2022, 37);
+
+foreach (var meal in meals)
+{
+    Console.WriteLine($"{meal.Title} {meal.Description}");
+}
 
 
 

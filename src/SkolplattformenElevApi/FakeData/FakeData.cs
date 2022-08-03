@@ -19,6 +19,7 @@ namespace SkolplattformenElevApi.FakeData
         public List<SchoolDetails> SchoolDetails { get; set; }
         public List<Teacher> Teachers { get; set; }
         public List<TimeTableLesson> TimeTable { get; set; }
+        public List<Meal> Meals { get; set; }
     }
 
 }
