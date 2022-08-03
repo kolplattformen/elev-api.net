@@ -69,7 +69,7 @@ foreach (var info in lessonInfo)
 }
 
 Console.WriteLine("\n------- Meals ---------");
-var meals = await api.GetMeals(2022, 37);
+var meals = await api.GetMealsAsync(2022, 37);
 
 foreach (var meal in meals)
 {
