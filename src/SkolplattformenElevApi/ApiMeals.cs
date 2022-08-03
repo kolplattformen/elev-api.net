@@ -7,7 +7,7 @@ namespace SkolplattformenElevApi;
 
 public partial class Api
 {
-    public Task<List<Meal>> GetMeals(int year, int week)
+    public Task<List<Meal>> GetMealsAsync(int year, int week)
     {
         // Not done yet
 

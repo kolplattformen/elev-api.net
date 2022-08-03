@@ -118,7 +118,7 @@ namespace SkolplattformenElevApi
             return Task.FromResult(_fakeData.PlannedAbsenceItems);
         }
 
-        public Task<List<Meal>> GetMeals(int year, int week)
+        public Task<List<Meal>> GetMealsAsync(int year, int week)
         {
             return Task.FromResult(_fakeData.Meals);
         }
