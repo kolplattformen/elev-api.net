@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using Microsoft.VisualBasic;
 using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.News;
 using System.Reflection;
@@ -110,7 +109,8 @@ namespace SkolplattformenElevApi
 
         public Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
         {
-            return Task.FromResult(_fakeData.CalendarItems);
+            var dateTime = date.ToDateTime(TimeOnly.Parse("00:00"));
+            return Task.FromResult(_fakeData.CalendarItems.Where(ci => ci.Start.Date <= dateTime.Date && ci.End.Date >= dateTime.Date).ToList());
         }
 
         public Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
