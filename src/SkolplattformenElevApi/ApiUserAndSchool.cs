@@ -163,6 +163,7 @@ public partial class Api
             PostalCode = s.PostalCode,
             Street = s.Street,
             VisitingAddress = s.VisitingAddress,
+            Locality = s.Locality,
             Email = s.Email,
             PrincipalName = s.Principal?.Fullname,
             PrincipalEmail = s.Principal?.Email,
