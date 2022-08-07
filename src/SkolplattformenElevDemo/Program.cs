@@ -8,7 +8,7 @@ Console.WriteLine("Hello, World!");
 var s = await File.ReadAllTextAsync("./elev.json");
 var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 
-var api = new FakeApi();
+var api = new Api();
 await api.LogInAsync(elev.Email, elev.Username, elev.Password);
 
 Console.WriteLine("\n----- News -----");
