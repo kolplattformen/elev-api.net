@@ -123,6 +123,11 @@ namespace SkolplattformenElevApi
             return Task.FromResult(_fakeData.Meals);
         }
 
+        public Task<List<KalendariumItem>> GetKalendariumAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
         {
             Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);
