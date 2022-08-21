@@ -76,6 +76,13 @@ foreach (var meal in meals)
     Console.WriteLine($"{meal.Title} {meal.Description}");
 }
 
+Console.WriteLine("\n------- Kalendarium ---------");
+var kalendarium = await api.GetKalendariumAsync();
+
+foreach (var item in kalendarium)
+{
+    Console.WriteLine($"{item.Title} {item.Description}");
+}
 
 
 return; // this just here to have a place to set a breakpoint
