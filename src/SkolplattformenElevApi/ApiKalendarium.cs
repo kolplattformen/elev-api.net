@@ -1,7 +1,5 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
+﻿using System.Text.Json;
 using SkolplattformenElevApi.Models;
-using System.Text.Json.Serialization;
 using SkolplattformenElevApi.Models.Internal.Kalendarium;
 using SkolplattformenElevApi.Utils;
 
@@ -11,7 +9,7 @@ public partial class Api
 {
     public async Task<List<KalendariumItem>> GetKalendariumAsync()
     {
-        // https://elevstockholm.sharepoint.com/sites/<skola>/_api/web/lists/getByTitle('Matsedel')/items
+        // https://elevstockholm.sharepoint.com/sites/<skola>/_api/web/lists/getByTitle('Kalendarium')/items
 
 
         if (string.IsNullOrEmpty(_schoolSharepointUrl))
@@ -46,9 +44,6 @@ public partial class Api
                 request.Headers.TryAddWithoutValidation("accept", new[] { "application/json;odata=nometadata" });
                 var responseMessage = await _httpClient.SendAsync(request);
                 var content = await responseMessage.Content.ReadAsStringAsync();
-
-
-                // TODO: Find out the format of the response and return a List<Meal>
 
                 var deserialized = JsonSerializer.Deserialize<KalendariumResponse>(content);
 
