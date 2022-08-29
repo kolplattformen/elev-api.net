@@ -142,6 +142,11 @@ namespace SkolplattformenElevApi
             return Task.FromResult(_fakeData.Kalendarium);
         }
 
+        public async Task RefreshLoginAsync()
+        {
+            await Task.Delay(100);
+        }
+
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
         {
             Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);
