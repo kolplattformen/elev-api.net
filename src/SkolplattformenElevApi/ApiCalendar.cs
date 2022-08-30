@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Web;
 using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.Internal.Calendar;
+using SkolplattformenElevApi.Utils;
 
 namespace SkolplattformenElevApi;
 
@@ -120,7 +121,7 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
             var calendarItemList = new List<CalendarItem>();
             foreach (var item in deserialized.Data)
             {
-                calendarItemList.Add(new CalendarItem
+                var ca = new CalendarItem
                 {
                     Id = item.Id,
                     Title = item.Title,
@@ -129,10 +130,24 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
                     End = item.End,
                     IsAllDay = false,
                     WebLink = item.WebLink,
-                });
+                };
+
+
+                
+
+                if (ca.Start.ToUniversalTime().Hour == 0 && ca.End.ToUniversalTime().Hour == 0 && ca.Start.Minute == 0 &&
+                    ca.End.Minute == 0)
+                {
+                    // Whole day events gets wrong timezone
+                    ca.Start = new DateTime(ca.Start.Year, ca.Start.Month, ca.Start.Day, 0, 0, 0);
+                    ca.End = new DateTime(ca.End.Year, ca.End.Month, ca.End.Day, 0, 0, 0);
+                    ca.IsAllDay = true;
+
+                }
+                calendarItemList.Add(ca);
             }
 
-            // Whole day events gets wrong timezone?
+            
             UpdateStatus(part,
                 calendarItemList.Count > 0 ? ApiReadSuccessIndicator.Success : ApiReadSuccessIndicator.NoData);
 
