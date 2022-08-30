@@ -219,7 +219,11 @@ namespace SkolplattformenElevApi
 
             // DONE at last. The last redirect should be back to the startpage but now logged in.
 
-            await SetupAfterLoginAsync(temp_res);
+            var url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/";
+
+            var res = await _httpClient.GetAsync(url);
+
+            await SetupAfterLoginAsync(res);
 
             _email = email;
             
@@ -262,10 +266,16 @@ namespace SkolplattformenElevApi
             _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
             _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
 
-            
 
-            await AbsenceSsoLoginAsync();
-            await TimetableSsoLoginAsync();
+            try
+            {
+                await AbsenceSsoLoginAsync();
+                await TimetableSsoLoginAsync();
+            }
+            catch
+            {
+
+            }
         }
 
         private string UpdateSamlTransactionIdInEncodedStartpageParam(string url, string samlTransationId)

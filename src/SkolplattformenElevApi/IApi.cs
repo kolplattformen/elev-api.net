@@ -20,5 +20,7 @@ namespace SkolplattformenElevApi
         Task<List<Meal>> GetMealsAsync(int year, int week);
         Task<List<KalendariumItem>> GetKalendariumAsync();
         Task RefreshLoginAsync();
+        ApiReadSuccessIndicator GetStatus(string part);
+        Dictionary<string, ApiReadSuccessIndicator> GetStatusAll();
     }
 }

@@ -11,6 +11,12 @@ var elev = JsonSerializer.Deserialize<ElevInfo>(s);
 var api = new Api();
 await api.LogInAsync(elev.Email, elev.Username, elev.Password);
 
+
+//Console.WriteLine("\n----- Logged in, waiting -----");
+//Task.Delay(1000 * 60 * 65 ).Wait();
+//Console.WriteLine("\n----- Done waiting -----");
+//await api.RefreshLoginAsync();
+
 Console.WriteLine("\n----- News -----");
 
 var itemList = await api.GetNewsItemListAsync(5);
@@ -84,6 +90,13 @@ foreach (var item in kalendarium)
     Console.WriteLine($"{item.Title} {item.Description}");
 }
 
+
+Console.WriteLine("\n------- Status ---------");
+var status = api.GetStatusAll();
+foreach (var st in status)
+{
+    Console.WriteLine($"{st.Key} {st.Value}");
+}
 
 return; // this just here to have a place to set a breakpoint
 
