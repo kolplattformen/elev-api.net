@@ -12,11 +12,13 @@ Some parts are working. Code is still a mess. Ongoing guesswork....
 * Getting a list of news items and a single news item is partly done.
 * Getting absence list
 * Getting timetable
-* Getting calendar entries
+* Getting student calendar entries
+* Getting school calendar entries (Kalendarium)
 * Getting user info
 * Getting school info
 * Getting list och teachers
 * Enrich timetable with curriculum and teachers' names to get a human readable output
+* Enrich teachers with curriculum, so we can list teachers and the subjects they teach
 
 ## Contribute / Try
 ### Prerequisites
