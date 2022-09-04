@@ -13,8 +13,16 @@ await api.LogInAsync(elev.Email, elev.Username, elev.Password);
 
 
 //Console.WriteLine("\n----- Logged in, waiting -----");
-//Task.Delay(1000 * 60 * 65 ).Wait();
+//var minutes = 65;
+//while (minutes > 0)
+//{
+//    Console.WriteLine($"{minutes} minutes left.");
+//    Task.Delay(1000 * 60).Wait();
+//    minutes--;
+//}
+
 //Console.WriteLine("\n----- Done waiting -----");
+//Console.ReadLine();
 //await api.RefreshLoginAsync();
 
 Console.WriteLine("\n----- News -----");
@@ -39,7 +47,8 @@ foreach (var a in absenceList)
 
 Console.WriteLine("\n----- Calendar ------");
 
-var calendarItems = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now));
+//var calendarItems = await api.GetCalendarAsync(DateOnly.FromDateTime(DateTime.Now));
+var calendarItems = await api.GetCalendarAsync(new DateOnly(2022,8,30));
 foreach (var item in calendarItems)
 {
     Console.WriteLine($"{item.Start} {item.End} {item.Title}");
