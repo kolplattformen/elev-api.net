@@ -147,7 +147,7 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
                 calendarItemList.Add(ca);
             }
 
-            // Sometimes the api returns events from the previous day
+            // Sometimes the api returns events from the next day
             calendarItemList = 
                 calendarItemList.Where(i 
                     => !(i.End.Date < date.ToDateTime(new TimeOnly(0, 0)).Date 
