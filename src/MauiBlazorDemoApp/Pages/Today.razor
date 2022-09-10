@@ -1,0 +1,77 @@
+﻿@page "/today"
+
+@using MauiBlazorDemoApp.Data
+@using MauiBlazorDemoApp.ViewModels
+@inject SkolplattformenService SkolplattformenService
+
+<h3>Min dag</h3>
+
+@if (today == null)
+{
+
+
+    <Loader></Loader>
+}
+else
+{
+    <h4>@today.SchoolStartTime-@today.SchoolEndTime</h4>
+    @if (@today.Sportsbag)
+    {
+        <span><em>Glöm inte gympapåsen!</em></span>
+    }
+
+    @if (@today.Items.Count == 0)
+    {
+        <span><em>Inget att visa idag</em></span>
+    }
+
+    foreach (var item in today.Items)
+    {
+        <p>
+            <strong>@item.StartTime-@item.EndTime @item.Title</strong>
+            <br/>
+            <span>@item.Description</span>
+        </p>
+    }
+
+}
+
+@code {
+    private ViewModels.Today today;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var items = new List<ViewModels.TodayItem>();
+        var now = DateTime.Now.AddDays(-2);
+        
+        // Get lessons
+        var dayOfWeek = (int)now.DayOfWeek;
+        var allLessons = await SkolplattformenService.GetTimetableAsync(now.Year, 37);
+        var lessons = allLessons.Where(x => x.DayOfWeekNumber == dayOfWeek).ToList();
+        foreach (var lesson in lessons)
+        {
+            items.Add(new TodayItem
+            {
+                StartTime = lesson.TimeStart.Substring(0,5),
+                EndTime = lesson.TimeEnd.Substring(0, 5),
+                Title = lesson.SubjectName,
+                Description = $"{lesson.TeacherName} {lesson.Location}"
+            });
+        }
+
+    // get calendar entries
+
+    // get lunch
+
+
+        today = new ViewModels.Today
+        {
+            Items = items.OrderBy(i=>i.StartTime).ToList(),
+                SchoolStartTime = lessons?.OrderBy(l => l.TimeStart).FirstOrDefault()?.TimeStart.Substring(0, 5) ?? "",
+                SchoolEndTime = lessons?.OrderByDescending(l => l.TimeEnd).FirstOrDefault()?.TimeEnd.Substring(0, 5) ?? "",
+            Sportsbag = lessons?.Any(l => l.SubjectCode == "IDH") ?? false
+        };
+
+    }
+
+}

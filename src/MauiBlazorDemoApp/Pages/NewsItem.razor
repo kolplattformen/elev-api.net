@@ -1,0 +1,29 @@
+﻿@page "/newsitem/{path}"
+
+@using MauiBlazorDemoApp.Data
+@using System.Text
+
+@inject SkolplattformenService SkolplattformenService
+
+@if(newsItem == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<h2>@newsItem.Title</h2>
+	@((MarkupString)newsItem.InnerHtml);
+}
+
+@code {
+	[Parameter]
+	public string path { get; set; }
+	private  SkolplattformenElevApi.Models.News.NewsItem newsItem;
+
+    protected override async Task OnInitializedAsync()
+	{
+		byte[] data = Convert.FromBase64String(path);
+		string decodedString = Encoding.UTF8.GetString(data);
+		newsItem = await SkolplattformenService.GetNewsItem(decodedString);
+	}
+}

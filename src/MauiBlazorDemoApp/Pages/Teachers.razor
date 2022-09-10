@@ -1,0 +1,33 @@
+﻿@page "/teachers"
+
+@using MauiBlazorDemoApp.Data
+@inject SkolplattformenService SkolplattformenService
+
+<h3>Mina lärare</h3>
+@if (teachers == null)
+{
+    <Loader></Loader>
+}
+else
+{
+
+    @foreach (var t in teachers)
+    {
+        <p><strong>@t.Firstname @t.Lastname </strong>
+        <br />
+            <span>@t.Email</span>
+        </p>
+
+    }
+
+}
+
+@code {
+    private List<SkolplattformenElevApi.Models.Teacher> teachers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        teachers = await SkolplattformenService.GetTeachersAsync();
+    }
+
+}

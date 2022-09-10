@@ -1,0 +1,42 @@
+﻿@page "/newslist"
+
+@using MauiBlazorDemoApp.Data
+@inject SkolplattformenService SkolplattformenService
+
+<h2>Nyheter</h2>
+
+@if (news == null)
+{
+	<Loader></Loader>
+}
+else
+{
+
+	@foreach (var n in news)
+	{
+		<b><a href="/newsitem/@ToBase64(n.Path)"> @n.Title </a></b>
+		<br />
+		@*<span>@n.EditorOwsUser</span><br />*@
+		<span>@n.LastModifiedTime.ToString("yyyy-MM-dd hh:mm")
+			<em>@n.ModifiedBy</em>
+		</span>
+		<br />
+
+	}
+
+}
+
+@code {
+	private List<SkolplattformenElevApi.Models.News.NewsListItem> news;
+
+	protected override async Task OnInitializedAsync()
+	{
+		news = await SkolplattformenService.GetNewsItemList();
+	}
+
+	private string ToBase64(string input)
+	{
+		var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(input);
+		return System.Convert.ToBase64String(plainTextBytes);
+	}
+}
